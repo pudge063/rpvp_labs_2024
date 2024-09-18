@@ -15,7 +15,7 @@ RUN apt-get update && \
 WORKDIR /app
 
 # COPY /src/broadcast.c /app/test.c
-COPY /src/${SOURCE_FILE} /app/test.c
+COPY /src/${LAB_B}/${SOURCE_FILE} /app/test.c
 
 RUN mpicc -o test test.c
 

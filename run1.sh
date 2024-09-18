@@ -4,6 +4,8 @@ set -a
 [ -f .env ] && . .env
 set +a
 
+LAB_N="lab_1"
+
 show_menu() {
     echo "Выберите программу:"
     echo "1) ring.c"
@@ -39,7 +41,7 @@ read_choice() {
 show_menu
 read_choice
 
-LOG_FILE="logs_$SOURCE_FILE.txt"
+LOG_FILE="lab_1/logs_$SOURCE_FILE.txt"
 DOCKER_COMPOSE_FILE="docker-compose.yml"
 
 >"$LOG_FILE"
@@ -50,6 +52,7 @@ run_container() {
     echo "Пересборка и запуск сервиса: $service_name" | tee -a "$LOG_FILE"
 
     export SOURCE_FILE
+    export LAB_N
 
     docker-compose build "$service_name" | grep "OUTPUT:" | tee -a "$LOG_FILE"
 
