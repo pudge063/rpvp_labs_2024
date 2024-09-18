@@ -1,0 +1,23 @@
+services:
+  mpi-app-1:
+    build:
+      context: .
+      args:
+        SOURCE_FILE: ${SOURCE_FILE}
+    container_name: mpi_2
+    command: [ "mpirun", "-np", "${MPI_CONTAINER_1}", "./test" ]
+  mpi-app-2:
+    build:
+      context: .
+      args:
+        SOURCE_FILE: ${SOURCE_FILE}
+    container_name: mpi_4
+    command: [ "mpirun", "-np", "${MPI_CONTAINER_2}", "./test" ]
+
+  mpi-app-3:
+    build:
+      context: .
+      args:
+        SOURCE_FILE: ${SOURCE_FILE}
+    container_name: mpi_8
+    command: [ "mpirun", "-np", "${MPI_CONTAINER_3}", "./test" ]
