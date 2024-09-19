@@ -1,0 +1,17 @@
+Wed Sep 18 20:33:40 UTC 2024
+Запуск с 2 процессами:
+Пересборка и запуск сервиса: mpi-app-1
+mpi_2  | OUTPUT: Approximate integral: 0.333333
+
+
+Запуск с 4 процессами:
+Пересборка и запуск сервиса: mpi-app-2
+mpi_4  | OUTPUT: Approximate integral: 0.333333
+
+
+Запуск с 8 процессами:
+Пересборка и запуск сервиса: mpi-app-3
+mpi_8  | OUTPUT: Approximate integral: 0.333334
+
+
+Все контейнеры выполнены.

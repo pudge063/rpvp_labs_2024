@@ -5,6 +5,7 @@ services:
       args:
         SOURCE_FILE: ${SOURCE_FILE}
         LAB_N: ${LAB_N}
+        COMPILE_CMD: ${COMPILE_CMD}
     container_name: mpi_2
     command: [ "mpirun", "-np", "${MPI_CONTAINER_1}", "./test" ]
   mpi-app-2:
@@ -13,6 +14,7 @@ services:
       args:
         SOURCE_FILE: ${SOURCE_FILE}
         LAB_N: ${LAB_N}
+        COMPILE_CMD: ${COMPILE_CMD}
     container_name: mpi_4
     command: [ "mpirun", "-np", "${MPI_CONTAINER_2}", "./test" ]
 
@@ -22,5 +24,6 @@ services:
       args:
         SOURCE_FILE: ${SOURCE_FILE}
         LAB_N: ${LAB_N}
+        COMPILE_CMD: ${COMPILE_CMD}
     container_name: mpi_8
     command: [ "mpirun", "-np", "${MPI_CONTAINER_3}", "./test" ]

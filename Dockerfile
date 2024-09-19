@@ -2,6 +2,8 @@
 FROM ubuntu:22.04
 
 ARG SOURCE_FILE
+ARG LAB_N
+ARG COMPILE_CMD
 
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -14,10 +16,14 @@ RUN apt-get update && \
 
 WORKDIR /app
 
-# COPY /src/broadcast.c /app/test.c
-COPY /src/${LAB_B}/${SOURCE_FILE} /app/test.c
+# RUN rm -rf /src
 
-RUN mpicc -o test test.c
+COPY /src/lab_${LAB_N}/${SOURCE_FILE} /app/test.c
+
+# RUN mpicc -o test test.c
+# RUN mpicc -o test test.c -lm
+
+RUN $COMPILE_CMD
 
 RUN chmod +x /app/test
 

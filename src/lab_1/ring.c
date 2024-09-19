@@ -41,7 +41,7 @@ void ring_exchange(int size, int count, char *message)
     {
         end_time = MPI_Wtime();
         elapsed_time = end_time - start_time;
-        printf("OUTPUT: Number of processes: %d, Message size: %d bytes, Time: %f seconds\n", num_procs, count, elapsed_time);
+        printf("OUTPUT: Количество процессов: %d, Размер сообщения: %d байт, Время: %f секунд\n", num_procs, count, elapsed_time);
     }
 }
 

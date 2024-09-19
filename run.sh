@@ -4,14 +4,17 @@ set -a
 [ -f .env ] && . .env
 set +a
 
-LAB_N="lab_1"
+# LAB_N=$LAB_N
 
 show_menu() {
-    echo "Выберите программу:"
-    echo "1) ring.c"
-    echo "2) broadcast.c"
-    echo "3) gather.c"
-    echo "4) alltoall.c"
+    echo "Номер лабы:"
+    echo "1) Лабораторная 1. Основные схемы обмена сообщениями"
+    echo "2) Лабораторная 2. Параллельное интегрирование"
+    echo "3) Лабораторная 3. Параллельное интегрирование"
+    echo "4) Лабораторная 4. Параллельное интегрирование"
+    echo "5) Лабораторная 5. Параллельное интегрирование"
+    echo "6) Лабораторная 6. Параллельное интегрирование"
+
 }
 
 read_choice() {
@@ -20,16 +23,22 @@ read_choice() {
 
     case $choice in
     1)
-        SOURCE_FILE="ring.c"
+        LAB_N=1
         ;;
     2)
-        SOURCE_FILE="broadcast.c"
+        LAB_N=2
         ;;
     3)
-        SOURCE_FILE="gather.c"
+        LAB_N=3
         ;;
     4)
-        SOURCE_FILE="alltoall.c"
+        LAB_N=4
+        ;;
+    5)
+        LAB_N=5
+        ;;
+    6)
+        LAB_N=6
         ;;
     *)
         echo "Неверный выбор. Попробуйте снова."
@@ -41,7 +50,9 @@ read_choice() {
 show_menu
 read_choice
 
-LOG_FILE="lab_1/logs_$SOURCE_FILE.txt"
+source runs/lab_$LAB_N.sh
+
+LOG_FILE="logs/lab_$LAB_N/logs_$SOURCE_FILE.txt"
 DOCKER_COMPOSE_FILE="docker-compose.yml"
 
 >"$LOG_FILE"
@@ -53,6 +64,7 @@ run_container() {
 
     export SOURCE_FILE
     export LAB_N
+    export COMPILE_CMD
 
     docker-compose build "$service_name" | grep "OUTPUT:" | tee -a "$LOG_FILE"
 
