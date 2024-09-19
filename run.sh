@@ -65,6 +65,7 @@ run_container() {
     export SOURCE_FILE
     export LAB_N
     export COMPILE_CMD
+    export VARIANT
 
     docker-compose build "$service_name" | grep "OUTPUT:" | tee -a "$LOG_FILE"
 

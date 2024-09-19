@@ -6,7 +6,9 @@ services:
         SOURCE_FILE: ${SOURCE_FILE}
         LAB_N: ${LAB_N}
         COMPILE_CMD: ${COMPILE_CMD}
-    container_name: mpi_2
+    container_name: mpi_${MPI_CONTAINER_1}
+    environment:
+      - VARIANT=${VARIANT}
     command: [ "mpirun", "-np", "${MPI_CONTAINER_1}", "./test" ]
   mpi-app-2:
     build:
@@ -15,7 +17,9 @@ services:
         SOURCE_FILE: ${SOURCE_FILE}
         LAB_N: ${LAB_N}
         COMPILE_CMD: ${COMPILE_CMD}
-    container_name: mpi_4
+    container_name: mpi_${MPI_CONTAINER_2}
+    environment:
+      - VARIANT=${VARIANT}
     command: [ "mpirun", "-np", "${MPI_CONTAINER_2}", "./test" ]
 
   mpi-app-3:
@@ -25,5 +29,7 @@ services:
         SOURCE_FILE: ${SOURCE_FILE}
         LAB_N: ${LAB_N}
         COMPILE_CMD: ${COMPILE_CMD}
-    container_name: mpi_8
+    container_name: mpi_${MPI_CONTAINER_3}
+    environment:
+      - VARIANT=${VARIANT}
     command: [ "mpirun", "-np", "${MPI_CONTAINER_3}", "./test" ]

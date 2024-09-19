@@ -1,52 +1,100 @@
 #include <mpi.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <math.h>
+#include <time.h>
 
-// Заданная функция
-double f(double x) {
-    return pow(x, 3) / (0.5 * pow(x, 7) + x + 6);
+double f1(double x, double y)
+{
+    return x / pow(y, 2);
 }
 
-// Численное интегрирование методом средних прямоугольников
-double integrate(double a, double b, int n) {
-    double h = (b - a) / n;
-    double sum = 0.0;
-    for (int i = 0; i < n; i++) {
-        double x = a + h * (i + 0.5);
-        sum += f(x);
+double f2(double x, double y)
+{
+    return pow(exp(x + y), 2);
+}
+
+double f3(double x, double y)
+{
+    return pow(exp(x - y), 2);
+}
+
+// генерация случайного числа в диапазоне [min, max]
+double rand_double(double min, double max)
+{
+    return min + (max - min) * ((double)rand() / RAND_MAX);
+}
+
+// вычисление интеграла методом monte-carlo
+double monte_carlo_integral(int num_points, int rank, int size, int variant)
+{
+    int local_points = num_points / size;
+    double local_sum = 0.0;
+
+    for (int i = 0; i < local_points; i++)
+    {
+        double x, y;
+        switch (variant)
+        {
+        case 1:
+            x = rand_double(0.0, 1.0);
+            y = rand_double(2.0, 5.0);
+            local_sum += f1(x, y);
+            break;
+        case 2:
+            x = rand_double(0.0, 1.0);
+            y = rand_double(0.0, 1.0 - x);
+            local_sum += f2(x, y);
+            break;
+        case 3:
+            x = rand_double(-1.0, 0.0);
+            y = rand_double(0.0, 1.0);
+            local_sum += f3(x, y);
+            break;
+        default:
+            printf("Неверный вариант задания!\n");
+            MPI_Abort(MPI_COMM_WORLD, 1);
+        }
     }
-    return sum * h;
+    
+    return local_sum * (1.0 * 1.0) / local_points;
 }
 
-int main(int argc, char *argv[]) {
+int main(int argc, char *argv[])
+{
     int rank, size;
-    double a = 0.4, b = 1.5;
-    int n = 1000000;  // Начальное количество прямоугольников
+    int n = 10000000; // число точек по умолчанию
+    double global_result = 0.0;
+
+    char *env_variant = getenv("VARIANT");
+    int variant = 0;
 
     MPI_Init(&argc, &argv);
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
     MPI_Comm_size(MPI_COMM_WORLD, &size);
 
-    double start_time, end_time;
-
-    if (rank == 0) {
-        start_time = MPI_Wtime();  // Запуск таймера
+    if (env_variant != NULL)
+    {
+        variant = atoi(env_variant) % 3 + 1;
+        if (rank == 0)
+        {
+            printf("OUTPUT: Вариант: %d\n", variant);
+        }
     }
 
-    // Расчет участка интегрирования для каждого процесса
-    double h = (b - a) / size;
-    double local_a = a + rank * h;
-    double local_b = local_a + h;
+    srand(time(NULL) + rank);
 
-    double local_integral = integrate(local_a, local_b, n / size);
+    double start_time = MPI_Wtime(); // запуск таймера
 
-    // Сбор результатов от всех процессов
-    double total_integral = 0.0;
-    MPI_Reduce(&local_integral, &total_integral, 1, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD);
+    double local_result = monte_carlo_integral(n, rank, size, variant); // вычисление локального интеграла
 
-    if (rank == 0) {
-        end_time = MPI_Wtime();  // Конец таймера
-        printf("OUTPUT: Значение интеграла: %lf\n", total_integral);
+    MPI_Reduce(&local_result, &global_result, 1, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD); // сложение результатов
+
+    double end_time = MPI_Wtime(); // стоп таймера
+
+    if (rank == 0)
+    {
+        printf("OUTPUT: Значение интеграла: %lf\n", global_result);
         printf("OUTPUT: Время выполнения: %lf секунд\n", end_time - start_time);
     }
 
