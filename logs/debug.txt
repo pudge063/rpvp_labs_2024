@@ -1,0 +1,171 @@
+#0 building with "desktop-linux" instance using docker driver
+
+#1 [mpi-app-1 internal] load build definition from Dockerfile
+#1 transferring dockerfile: 546B done
+#1 DONE 0.0s
+
+#2 [mpi-app-1 internal] load metadata for docker.io/library/ubuntu:22.04
+#2 DONE 2.2s
+
+#3 [mpi-app-1 internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [mpi-app-1 1/6] FROM docker.io/library/ubuntu:22.04@sha256:58b87898e82351c6cf9cf5b9f3c20257bb9e2dcf33af051e12ce532d7f94e3fe
+#4 DONE 0.0s
+
+#5 [mpi-app-1 internal] load build context
+#5 transferring context: 3.77kB done
+#5 DONE 0.0s
+
+#6 [mpi-app-1 2/6] RUN apt-get update &&     apt-get install -y     build-essential     mpich     mpich-doc     && rm -rf /var/lib/apt/lists/*
+#6 CACHED
+
+#7 [mpi-app-1 3/6] WORKDIR /app
+#7 CACHED
+
+#8 [mpi-app-1 4/6] COPY /src/lab_3/sgemv.c /app/test.c
+#8 DONE 0.0s
+
+#9 [mpi-app-1 5/6] RUN mpicc -o test test.c -lm
+#9 DONE 0.3s
+
+#10 [mpi-app-1 6/6] RUN chmod +x /app/test
+#10 DONE 0.1s
+
+#11 [mpi-app-1] exporting to image
+#11 exporting layers 0.0s done
+#11 writing image sha256:2644af3e68b3dbea7cb6ab5c441d61bb46d2592c3212f8d76430a0085573435a done
+#11 naming to docker.io/library/files-mpi-app-1 done
+#11 DONE 0.0s
+
+#12 [mpi-app-1] resolving provenance for metadata file
+#12 DONE 0.0s
+Attaching to mpi_1
+mpi_1  | 
+mpi_1  | ===================================================================================
+mpi_1  | =   BAD TERMINATION OF ONE OF YOUR APPLICATION PROCESSES
+mpi_1  | =   PID 8 RUNNING AT 00be08d63ea0
+mpi_1  | =   EXIT CODE: 11
+mpi_1  | =   CLEANING UP REMAINING PROCESSES
+mpi_1  | =   YOU CAN IGNORE THE BELOW CLEANUP MESSAGES
+mpi_1  | ===================================================================================
+mpi_1  | YOUR APPLICATION TERMINATED WITH THE EXIT STRING: Segmentation fault (signal 11)
+mpi_1  | This typically refers to a problem with your application.
+mpi_1  | Please see the FAQ page for debugging suggestions
+
+[Kmpi_1 exited with code 11
+#0 building with "desktop-linux" instance using docker driver
+
+#1 [mpi-app-2 internal] load build definition from Dockerfile
+#1 transferring dockerfile: 546B done
+#1 DONE 0.0s
+
+#2 [mpi-app-2 internal] load metadata for docker.io/library/ubuntu:22.04
+#2 DONE 0.3s
+
+#3 [mpi-app-2 internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [mpi-app-2 1/6] FROM docker.io/library/ubuntu:22.04@sha256:58b87898e82351c6cf9cf5b9f3c20257bb9e2dcf33af051e12ce532d7f94e3fe
+#4 DONE 0.0s
+
+#5 [mpi-app-2 internal] load build context
+#5 transferring context: 202B done
+#5 DONE 0.0s
+
+#6 [mpi-app-2 4/6] COPY /src/lab_3/sgemv.c /app/test.c
+#6 CACHED
+
+#7 [mpi-app-2 3/6] WORKDIR /app
+#7 CACHED
+
+#8 [mpi-app-2 5/6] RUN mpicc -o test test.c -lm
+#8 CACHED
+
+#9 [mpi-app-2 2/6] RUN apt-get update &&     apt-get install -y     build-essential     mpich     mpich-doc     && rm -rf /var/lib/apt/lists/*
+#9 CACHED
+
+#10 [mpi-app-2 6/6] RUN chmod +x /app/test
+#10 CACHED
+
+#11 [mpi-app-2] exporting to image
+#11 exporting layers done
+#11 writing image sha256:34d3324782dd8945e2a1fe87acf4357019b362449e72c41f6972362bc6a0e60b done
+#11 naming to docker.io/library/files-mpi-app-2 done
+#11 DONE 0.0s
+
+#12 [mpi-app-2] resolving provenance for metadata file
+#12 DONE 0.0s
+Attaching to mpi_1
+mpi_1  | 
+mpi_1  | ===================================================================================
+mpi_1  | =   BAD TERMINATION OF ONE OF YOUR APPLICATION PROCESSES
+mpi_1  | =   PID 8 RUNNING AT f05257179dec
+mpi_1  | =   EXIT CODE: 11
+mpi_1  | =   CLEANING UP REMAINING PROCESSES
+mpi_1  | =   YOU CAN IGNORE THE BELOW CLEANUP MESSAGES
+mpi_1  | ===================================================================================
+mpi_1  | YOUR APPLICATION TERMINATED WITH THE EXIT STRING: Segmentation fault (signal 11)
+mpi_1  | This typically refers to a problem with your application.
+mpi_1  | Please see the FAQ page for debugging suggestions
+
+[Kmpi_1 exited with code 11
+#0 building with "desktop-linux" instance using docker driver
+
+#1 [mpi-app-3 internal] load build definition from Dockerfile
+#1 transferring dockerfile: 546B done
+#1 DONE 0.0s
+
+#2 [mpi-app-3 internal] load metadata for docker.io/library/ubuntu:22.04
+#2 DONE 0.3s
+
+#3 [mpi-app-3 internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [mpi-app-3 1/6] FROM docker.io/library/ubuntu:22.04@sha256:58b87898e82351c6cf9cf5b9f3c20257bb9e2dcf33af051e12ce532d7f94e3fe
+#4 DONE 0.0s
+
+#5 [mpi-app-3 internal] load build context
+#5 transferring context: 202B done
+#5 DONE 0.0s
+
+#6 [mpi-app-3 3/6] WORKDIR /app
+#6 CACHED
+
+#7 [mpi-app-3 5/6] RUN mpicc -o test test.c -lm
+#7 CACHED
+
+#8 [mpi-app-3 2/6] RUN apt-get update &&     apt-get install -y     build-essential     mpich     mpich-doc     && rm -rf /var/lib/apt/lists/*
+#8 CACHED
+
+#9 [mpi-app-3 4/6] COPY /src/lab_3/sgemv.c /app/test.c
+#9 CACHED
+
+#10 [mpi-app-3 6/6] RUN chmod +x /app/test
+#10 CACHED
+
+#11 [mpi-app-3] exporting to image
+#11 exporting layers done
+#11 writing image sha256:8429a54d8d8f654ea73d2eaf7b01a50e720c75a1e88b466730cf8e83728bf1b3 done
+#11 naming to docker.io/library/files-mpi-app-3 done
+#11 DONE 0.0s
+
+#12 [mpi-app-3] resolving provenance for metadata file
+#12 DONE 0.0s
+Attaching to mpi_1
+mpi_1  | 
+mpi_1  | ===================================================================================
+mpi_1  | =   BAD TERMINATION OF ONE OF YOUR APPLICATION PROCESSES
+mpi_1  | =   PID 7 RUNNING AT 20597bd4bc5e
+mpi_1  | =   EXIT CODE: 11
+mpi_1  | =   CLEANING UP REMAINING PROCESSES
+mpi_1  | =   YOU CAN IGNORE THE BELOW CLEANUP MESSAGES
+mpi_1  | ===================================================================================
+mpi_1  | YOUR APPLICATION TERMINATED WITH THE EXIT STRING: Segmentation fault (signal 11)
+mpi_1  | This typically refers to a problem with your application.
+mpi_1  | Please see the FAQ page for debugging suggestions
+
+[Kmpi_1 exited with code 11

@@ -56,15 +56,15 @@ double monte_carlo_integral(int num_points, int rank, int size, int variant)
             MPI_Abort(MPI_COMM_WORLD, 1);
         }
     }
-    
+
     return local_sum * (1.0 * 1.0) / local_points;
 }
 
 int main(int argc, char *argv[])
 {
     int rank, size;
-    int n = 10000000; // число точек по умолчанию
-    double global_result = 0.0;
+    int variants[] = {10000000, 100000000}; // 10^7 и 10^8
+    double global_results[2] = {0.0, 0.0};
 
     char *env_variant = getenv("VARIANT");
     int variant = 0;
@@ -84,18 +84,23 @@ int main(int argc, char *argv[])
 
     srand(time(NULL) + rank);
 
-    double start_time = MPI_Wtime(); // запуск таймера
-
-    double local_result = monte_carlo_integral(n, rank, size, variant); // вычисление локального интеграла
-
-    MPI_Reduce(&local_result, &global_result, 1, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD); // сложение результатов
-
-    double end_time = MPI_Wtime(); // стоп таймера
-
-    if (rank == 0)
+    for (int i = 0; i < 2; i++)
     {
-        printf("OUTPUT: Значение интеграла: %lf\n", global_result);
-        printf("OUTPUT: Время выполнения: %lf секунд\n", end_time - start_time);
+        int n = pow(10, variants[i]);
+
+        double start_time = MPI_Wtime(); // запуск таймера
+
+        double local_result = monte_carlo_integral(n, rank, size, variant); // вычисление локального интеграла
+
+        MPI_Reduce(&local_result, &global_results[i], 1, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD); // сложение результатов
+
+        double end_time = MPI_Wtime(); // стоп таймера
+
+        if (rank == 0)
+        {
+            printf("OUTPUT: Значение интеграла для n = %d: %lf\n", variants[i], global_results[i]);
+            printf("OUTPUT: Время выполнения для n = %d: %lf секунд\n", variants[i], end_time - start_time);
+        }
     }
 
     MPI_Finalize();

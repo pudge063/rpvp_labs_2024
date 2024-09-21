@@ -4,13 +4,11 @@ set -a
 [ -f .env ] && . .env
 set +a
 
-# LAB_N=$LAB_N
-
 show_menu() {
     echo "Номер лабы:"
     echo "1) Лабораторная 1. Основные схемы обмена сообщениями"
     echo "2) Лабораторная 2. Параллельное интегрирование"
-    echo "3) Лабораторная 3. Параллельное интегрирование"
+    echo "3) Лабораторная 3. Параллельное умножение матрицы на вектор"
     echo "4) Лабораторная 4. Параллельное интегрирование"
     echo "5) Лабораторная 5. Параллельное интегрирование"
     echo "6) Лабораторная 6. Параллельное интегрирование"
@@ -54,9 +52,12 @@ source runs/lab_$LAB_N.sh
 
 LOG_FILE="logs/lab_$LAB_N/logs_$SOURCE_FILE.txt"
 DOCKER_COMPOSE_FILE="docker-compose.yml"
+DEBUG_LOG_FILE="logs/debug.txt"
 
 >"$LOG_FILE"
+>"$DEBUG_LOG_FILE"
 echo $(date -u) >>"$LOG_FILE"
+echo -e "\n" | tee -a "$LOG_FILE"
 
 run_container() {
     local service_name=$1
@@ -67,9 +68,9 @@ run_container() {
     export COMPILE_CMD
     export VARIANT
 
-    docker-compose build "$service_name" | grep "OUTPUT:" | tee -a "$LOG_FILE"
+    docker-compose build "$service_name" | tee -a "$DEBUG_LOG_FILE" | grep "OUTPUT:" | tee -a "$LOG_FILE"
 
-    docker-compose up "$service_name" | grep "OUTPUT:" | tee -a "$LOG_FILE"
+    docker-compose up "$service_name" | tee -a "$DEBUG_LOG_FILE" | grep "OUTPUT:" | tee -a "$LOG_FILE"
 
     docker-compose down | tee -a "$LOG_FILE"
 
