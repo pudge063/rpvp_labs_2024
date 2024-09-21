@@ -9,7 +9,7 @@ services:
     container_name: mpi_${MPI_CONTAINER_1}
     environment:
       - VARIANT=${VARIANT}
-    command: [ "mpirun", "--allow-run-as-root", "-np", "${MPI_CONTAINER_1}", "./test" ]
+    command: [ "mpirun", "--allow-run-as-root", "-np", "${MPI_CONTAINER_1}", "./test" , "$MATRIX_ARGS", "$MATRIX_ARGS", "$MATRIX_ARGS"]
   mpi-app-2:
     build:
       context: .

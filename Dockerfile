@@ -19,6 +19,8 @@ WORKDIR /app
 
 # RUN rm -rf /src
 
+COPY /src/lab_${LAB_N} /app
+
 COPY /src/lab_${LAB_N}/${SOURCE_FILE} /app/test.c
 
 # RUN mpicc -o test test.c

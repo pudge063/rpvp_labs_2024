@@ -1,103 +1,110 @@
 #0 building with "desktop-linux" instance using docker driver
 
 #1 [mpi-app-1 internal] load build definition from Dockerfile
-#1 transferring dockerfile: 599B done
+#1 transferring dockerfile: 628B done
 #1 DONE 0.0s
 
 #2 [mpi-app-1 internal] load metadata for docker.io/library/ubuntu:22.04
-#2 DONE 0.9s
+#2 DONE 1.2s
 
 #3 [mpi-app-1 internal] load .dockerignore
 #3 transferring context: 2B done
 #3 DONE 0.0s
 
-#4 [mpi-app-1 1/6] FROM docker.io/library/ubuntu:22.04@sha256:58b87898e82351c6cf9cf5b9f3c20257bb9e2dcf33af051e12ce532d7f94e3fe
+#4 [mpi-app-1 1/7] FROM docker.io/library/ubuntu:22.04@sha256:58b87898e82351c6cf9cf5b9f3c20257bb9e2dcf33af051e12ce532d7f94e3fe
 #4 DONE 0.0s
 
 #5 [mpi-app-1 internal] load build context
-#5 transferring context: 201B done
+#5 transferring context: 4.47kB done
 #5 DONE 0.0s
 
-#6 [mpi-app-1 3/6] WORKDIR /app
+#6 [mpi-app-1 2/7] RUN apt-get update &&     apt-get install -y     build-essential     openmpi-bin openmpi-common libopenmpi-dev      && rm -rf /var/lib/apt/lists/*
 #6 CACHED
 
-#7 [mpi-app-1 5/6] RUN mpicc -o test test.c
+#7 [mpi-app-1 3/7] WORKDIR /app
 #7 CACHED
 
-#8 [mpi-app-1 2/6] RUN apt-get update &&     apt-get install -y     build-essential     openmpi-bin openmpi-common libopenmpi-dev      && rm -rf /var/lib/apt/lists/*
-#8 CACHED
+#8 [mpi-app-1 4/7] COPY /src/lab_6 /app
+#8 DONE 0.0s
 
-#9 [mpi-app-1 4/6] COPY /src/lab_1/ring.c /app/test.c
-#9 CACHED
+#9 [mpi-app-1 5/7] COPY /src/lab_6/start.c /app/test.c
+#9 DONE 0.0s
 
-#10 [mpi-app-1 6/6] RUN chmod +x /app/test
-#10 CACHED
-
-#11 [mpi-app-1] exporting to image
-#11 exporting layers done
-#11 writing image sha256:42447ba133fad036576a16fe0d09203c5abd3369b0fed0fa7a0a226cfce439d6 done
-#11 naming to docker.io/library/files-mpi-app-1 done
-#11 DONE 0.0s
-
-#12 [mpi-app-1] resolving provenance for metadata file
-#12 DONE 0.0s
+#10 [mpi-app-1 6/7] RUN mpicc -o test ./test.c
+#10 0.142 ./test.c: In function 'main':
+#10 0.142 ./test.c:81:25: error: 'rows_for_process' undeclared (first use in this function); did you mean 'rows_per_process'?
+#10 0.142    81 |     double **C = malloc(rows_for_process * sizeof(double *));
+#10 0.142       |                         ^~~~~~~~~~~~~~~~
+#10 0.142       |                         rows_per_process
+#10 0.142 ./test.c:81:25: note: each undeclared identifier is reported only once for each function it appears in
+#10 ERROR: process "/bin/sh -c $COMPILE_CMD" did not complete successfully: exit code: 1
+------
+ > [mpi-app-1 6/7] RUN mpicc -o test ./test.c:
+0.142 ./test.c: In function 'main':
+0.142 ./test.c:81:25: error: 'rows_for_process' undeclared (first use in this function); did you mean 'rows_per_process'?
+0.142    81 |     double **C = malloc(rows_for_process * sizeof(double *));
+0.142       |                         ^~~~~~~~~~~~~~~~
+0.142       |                         rows_per_process
+0.142 ./test.c:81:25: note: each undeclared identifier is reported only once for each function it appears in
+------
 Attaching to mpi_1
-mpi_1  | OUTPUT: Количество процессов: 1, Размер сообщения: 1 байт, Время: 0.000000 секунд
-mpi_1  | OUTPUT: Количество процессов: 1, Размер сообщения: 1024 байт, Время: 0.000000 секунд
-mpi_1  | OUTPUT: Количество процессов: 1, Размер сообщения: 1048576 байт, Время: 0.000000 секунд
-[Kmpi_1 exited with code 0
+[Kmpi_1 exited with code 139
 #0 building with "desktop-linux" instance using docker driver
 
 #1 [mpi-app-2 internal] load build definition from Dockerfile
-#1 transferring dockerfile: 599B done
+#1 transferring dockerfile: 628B done
 #1 DONE 0.0s
 
 #2 [mpi-app-2 internal] load metadata for docker.io/library/ubuntu:22.04
-#2 DONE 0.3s
+#2 DONE 1.0s
 
 #3 [mpi-app-2 internal] load .dockerignore
 #3 transferring context: 2B done
 #3 DONE 0.0s
 
-#4 [mpi-app-2 1/6] FROM docker.io/library/ubuntu:22.04@sha256:58b87898e82351c6cf9cf5b9f3c20257bb9e2dcf33af051e12ce532d7f94e3fe
+#4 [mpi-app-2 1/7] FROM docker.io/library/ubuntu:22.04@sha256:58b87898e82351c6cf9cf5b9f3c20257bb9e2dcf33af051e12ce532d7f94e3fe
 #4 DONE 0.0s
 
 #5 [mpi-app-2 internal] load build context
-#5 transferring context: 201B done
+#5 transferring context: 344B done
 #5 DONE 0.0s
 
-#6 [mpi-app-2 2/6] RUN apt-get update &&     apt-get install -y     build-essential     openmpi-bin openmpi-common libopenmpi-dev      && rm -rf /var/lib/apt/lists/*
+#6 [mpi-app-2 3/7] WORKDIR /app
 #6 CACHED
 
-#7 [mpi-app-2 4/6] COPY /src/lab_1/ring.c /app/test.c
+#7 [mpi-app-2 4/7] COPY /src/lab_6 /app
 #7 CACHED
 
-#8 [mpi-app-2 3/6] WORKDIR /app
+#8 [mpi-app-2 2/7] RUN apt-get update &&     apt-get install -y     build-essential     openmpi-bin openmpi-common libopenmpi-dev      && rm -rf /var/lib/apt/lists/*
 #8 CACHED
 
-#9 [mpi-app-2 5/6] RUN mpicc -o test test.c
+#9 [mpi-app-2 5/7] COPY /src/lab_6/start.c /app/test.c
 #9 CACHED
 
-#10 [mpi-app-2 6/6] RUN chmod +x /app/test
-#10 CACHED
-
-#11 [mpi-app-2] exporting to image
-#11 exporting layers done
-#11 writing image sha256:ffcc788b7cc199f71c1e44083ab810f940bae7e58ffe7ac442dcd502d7e6de90 done
-#11 naming to docker.io/library/files-mpi-app-2 done
-#11 DONE 0.0s
-
-#12 [mpi-app-2] resolving provenance for metadata file
-#12 DONE 0.0s
-Attaching to mpi_1
-mpi_1  | OUTPUT: Количество процессов: 1, Размер сообщения: 1 байт, Время: 0.000000 секунд
-mpi_1  | OUTPUT: Количество процессов: 1, Размер сообщения: 1024 байт, Время: 0.000000 секунд
-mpi_1  | OUTPUT: Количество процессов: 1, Размер сообщения: 1048576 байт, Время: 0.000000 секунд
-[Kmpi_1 exited with code 0
+#10 [mpi-app-2 6/7] RUN mpicc -o test ./test.c
+#10 0.101 ./test.c: In function 'main':
+#10 0.101 ./test.c:81:25: error: 'rows_for_process' undeclared (first use in this function); did you mean 'rows_per_process'?
+#10 0.101    81 |     double **C = malloc(rows_for_process * sizeof(double *));
+#10 0.101       |                         ^~~~~~~~~~~~~~~~
+#10 0.101       |                         rows_per_process
+#10 0.101 ./test.c:81:25: note: each undeclared identifier is reported only once for each function it appears in
+#10 ERROR: process "/bin/sh -c $COMPILE_CMD" did not complete successfully: exit code: 1
+------
+ > [mpi-app-2 6/7] RUN mpicc -o test ./test.c:
+0.101 ./test.c: In function 'main':
+0.101 ./test.c:81:25: error: 'rows_for_process' undeclared (first use in this function); did you mean 'rows_per_process'?
+0.101    81 |     double **C = malloc(rows_for_process * sizeof(double *));
+0.101       |                         ^~~~~~~~~~~~~~~~
+0.101       |                         rows_per_process
+0.101 ./test.c:81:25: note: each undeclared identifier is reported only once for each function it appears in
+------
+Attaching to mpi_2
+mpi_2  | Usage: ./test <n1> <n2> <n3>
+[Kmpi_2 exited with code 1
 #0 building with "desktop-linux" instance using docker driver
 
 #1 [mpi-app-3 internal] load build definition from Dockerfile
-#1 transferring dockerfile: 599B done
+#1 transferring dockerfile: 628B done
 #1 DONE 0.0s
 
 #2 [mpi-app-3 internal] load metadata for docker.io/library/ubuntu:22.04
@@ -107,38 +114,42 @@ mpi_1  | OUTPUT: Количество процессов: 1, Размер соо
 #3 transferring context: 2B done
 #3 DONE 0.0s
 
-#4 [mpi-app-3 1/6] FROM docker.io/library/ubuntu:22.04@sha256:58b87898e82351c6cf9cf5b9f3c20257bb9e2dcf33af051e12ce532d7f94e3fe
+#4 [mpi-app-3 1/7] FROM docker.io/library/ubuntu:22.04@sha256:58b87898e82351c6cf9cf5b9f3c20257bb9e2dcf33af051e12ce532d7f94e3fe
 #4 DONE 0.0s
 
 #5 [mpi-app-3 internal] load build context
-#5 transferring context: 201B done
+#5 transferring context: 344B done
 #5 DONE 0.0s
 
-#6 [mpi-app-3 3/6] WORKDIR /app
+#6 [mpi-app-3 2/7] RUN apt-get update &&     apt-get install -y     build-essential     openmpi-bin openmpi-common libopenmpi-dev      && rm -rf /var/lib/apt/lists/*
 #6 CACHED
 
-#7 [mpi-app-3 2/6] RUN apt-get update &&     apt-get install -y     build-essential     openmpi-bin openmpi-common libopenmpi-dev      && rm -rf /var/lib/apt/lists/*
+#7 [mpi-app-3 3/7] WORKDIR /app
 #7 CACHED
 
-#8 [mpi-app-3 4/6] COPY /src/lab_1/ring.c /app/test.c
+#8 [mpi-app-3 4/7] COPY /src/lab_6 /app
 #8 CACHED
 
-#9 [mpi-app-3 5/6] RUN mpicc -o test test.c
+#9 [mpi-app-3 5/7] COPY /src/lab_6/start.c /app/test.c
 #9 CACHED
 
-#10 [mpi-app-3 6/6] RUN chmod +x /app/test
-#10 CACHED
-
-#11 [mpi-app-3] exporting to image
-#11 exporting layers done
-#11 writing image sha256:c977bd844454cb378f5ac6778c3a6d145f20a16149cfdde748fe9c49f6214fea done
-#11 naming to docker.io/library/files-mpi-app-3 done
-#11 DONE 0.0s
-
-#12 [mpi-app-3] resolving provenance for metadata file
-#12 DONE 0.0s
-Attaching to mpi_1
-mpi_1  | OUTPUT: Количество процессов: 1, Размер сообщения: 1 байт, Время: 0.000000 секунд
-mpi_1  | OUTPUT: Количество процессов: 1, Размер сообщения: 1024 байт, Время: 0.000000 секунд
-mpi_1  | OUTPUT: Количество процессов: 1, Размер сообщения: 1048576 байт, Время: 0.000000 секунд
-[Kmpi_1 exited with code 0
+#10 [mpi-app-3 6/7] RUN mpicc -o test ./test.c
+#10 0.092 ./test.c: In function 'main':
+#10 0.092 ./test.c:81:25: error: 'rows_for_process' undeclared (first use in this function); did you mean 'rows_per_process'?
+#10 0.092    81 |     double **C = malloc(rows_for_process * sizeof(double *));
+#10 0.092       |                         ^~~~~~~~~~~~~~~~
+#10 0.092       |                         rows_per_process
+#10 0.092 ./test.c:81:25: note: each undeclared identifier is reported only once for each function it appears in
+#10 ERROR: process "/bin/sh -c $COMPILE_CMD" did not complete successfully: exit code: 1
+------
+ > [mpi-app-3 6/7] RUN mpicc -o test ./test.c:
+0.092 ./test.c: In function 'main':
+0.092 ./test.c:81:25: error: 'rows_for_process' undeclared (first use in this function); did you mean 'rows_per_process'?
+0.092    81 |     double **C = malloc(rows_for_process * sizeof(double *));
+0.092       |                         ^~~~~~~~~~~~~~~~
+0.092       |                         rows_per_process
+0.092 ./test.c:81:25: note: each undeclared identifier is reported only once for each function it appears in
+------
+Attaching to mpi_4
+mpi_4  | Usage: ./test <n1> <n2> <n3>
+[Kmpi_4 exited with code 1
