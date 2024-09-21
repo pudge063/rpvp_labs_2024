@@ -4,20 +4,21 @@ set -a
 [ -f .env ] && . .env
 set +a
 
+echo "Текущий вариант $VARIANT. Изменить вариант в .env файле."
+
 show_menu() {
     echo "Номер лабы:"
     echo "1) Лабораторная 1. Основные схемы обмена сообщениями"
     echo "2) Лабораторная 2. Параллельное интегрирование"
     echo "3) Лабораторная 3. Параллельное умножение матрицы на вектор"
-    echo "4) Лабораторная 4. Параллельное интегрирование"
-    echo "5) Лабораторная 5. Параллельное интегрирование"
-    echo "6) Лабораторная 6. Параллельное интегрирование"
-
+    echo "4) Лабораторная 4. Обмен данными на системе компьютеров с топологией кольцо."
+    echo "5) Лабораторная 5. Обмен данными на системе компьютеров с топологией линейка."
+    echo "6) Лабораторная 6. Произведение двух матриц в топологии кольцо."
 }
 
 read_choice() {
     local choice
-    read -p "Введите номер программы (1-4): " choice
+    read -p "Введите номер программы (1-6): " choice
 
     case $choice in
     1)
@@ -39,7 +40,7 @@ read_choice() {
         LAB_N=6
         ;;
     *)
-        echo "Неверный выбор. Попробуйте снова."
+        echo "Такой лабы нет. Повторный ввод."
         read_choice
         ;;
     esac
@@ -67,10 +68,13 @@ run_container() {
     export LAB_N
     export COMPILE_CMD
     export VARIANT
+    export MATRIX_ARGS
 
-    docker-compose build "$service_name" | tee -a "$DEBUG_LOG_FILE" | grep "OUTPUT:" | tee -a "$LOG_FILE"
+    docker-compose build "$service_name" | tee -a "$DEBUG_LOG_FILE"
 
-    docker-compose up "$service_name" | tee -a "$DEBUG_LOG_FILE" | grep "OUTPUT:" | tee -a "$LOG_FILE"
+    docker-compose up "$service_name" | tee -a "$DEBUG_LOG_FILE"
+
+    docker-compose logs "$service_name" | grep -E "OUTPUT:" | tee -a "$LOG_FILE"
 
     docker-compose down | tee -a "$LOG_FILE"
 
