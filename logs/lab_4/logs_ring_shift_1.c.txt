@@ -1,23 +1,30 @@
-Sat Sep 21 16:33:41 UTC 2024
-
-
-Запуск с 1 процессами:
-Пересборка и запуск сервиса: mpi-app-1
-mpi_1  | OUTPUT: rank=0 B=0
+Sun Sep 22 20:13:49 UTC 2024
 
 
 Запуск с 2 процессами:
-Пересборка и запуск сервиса: mpi-app-2
+Пересборка и запуск сервиса: mpi-app-1
 mpi_2  | OUTPUT: rank=0 B=1
 mpi_2  | OUTPUT: rank=1 B=0
 
 
 Запуск с 4 процессами:
-Пересборка и запуск сервиса: mpi-app-3
+Пересборка и запуск сервиса: mpi-app-2
+mpi_4  | OUTPUT: rank=0 B=3
 mpi_4  | OUTPUT: rank=1 B=0
 mpi_4  | OUTPUT: rank=2 B=1
 mpi_4  | OUTPUT: rank=3 B=2
-mpi_4  | OUTPUT: rank=0 B=3
+
+
+Запуск с 8 процессами:
+Пересборка и запуск сервиса: mpi-app-3
+mpi_8  | OUTPUT: rank=7 B=6
+mpi_8  | OUTPUT: rank=0 B=7
+mpi_8  | OUTPUT: rank=1 B=0
+mpi_8  | OUTPUT: rank=4 B=3
+mpi_8  | OUTPUT: rank=5 B=4
+mpi_8  | OUTPUT: rank=6 B=5
+mpi_8  | OUTPUT: rank=2 B=1
+mpi_8  | OUTPUT: rank=3 B=2
 
 
 Все контейнеры выполнены.

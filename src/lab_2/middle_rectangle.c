@@ -36,6 +36,7 @@ double f_variant_6(double x)
 // метод вычисления интеграла прямоугольниками
 double integrate(double (*f)(double), double a, double b, int n)
 {
+    // функция численного интегрирования через вычисление площади маленьких прямоугольников
     double h = (b - a) / n;
     double sum = 0.0;
     for (int i = 0; i < n; i++)
@@ -128,26 +129,47 @@ int main(int argc, char *argv[])
         start_time = MPI_Wtime();
     }
 
+    //
+
     // участок интегрирования каждого процесса
+    // подготовка к параллельным вычислениям
     double h = (b - a) / size;
     double local_a = a + rank * h;
     double local_b = local_a + h;
 
     // выполнение интегрирования каждого участка
-    double local_integral = integrate(f, local_a, local_b, n / size);
+    double local_integral = integrate(f, local_a, local_b, n / size); // запускает параллельное вычисление на разных процессах
+    
+    /*
+        функция integrate запускается на разных процессах неявно.
+        1. иницилализация mpi
+        2. определение ранга и количества процессов
+        3. когда каждый процесс доходит до строки вызова integrate, он выполняет её в собственной копии программы
+        (ход программы выглядит одинаково для всех процессов, по факту они работают в независимых контекстах)
+        4. сбор результатов на процесс 0 -> суммируются local интегралы с каждого процесса в total интеграл с помощью Reduce
+    */
 
     // сбор интегралов с каждого процесса на процесс 0
     double total_integral = 0.0;
     MPI_Reduce(&local_integral, &total_integral, 1, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD);
+    // reduce суммирует local_integral с каждого процесса в total_integral, получаем общую площадь под графиком
+    /*
+     аргументы: 
+        1 - оличество суммируемых элементов
+        DOUBLE -тип данных
+        MPI_SUM - операция
+        0 - ранг процесса, принимающего результат
+        MPI_COMM_WORLD - коммуникатор
+    */
 
     // лог результата
     if (rank == 0)
     {
         end_time = MPI_Wtime();
         printf("OUTPUT: Значение интеграла: %lf\n", total_integral);
-        printf("OUTPUT: Время выполнения: %lf секунд\n", end_time - start_time);
+        printf("OUTPUT: Время выполнения: %lf секунд\n", end_time - start_time); // выводы
     }
 
-    MPI_Finalize();
+    MPI_Finalize(); // выход
     return 0;
 }
