@@ -26,6 +26,12 @@ double rand_double(double min, double max)
 }
 
 // вычисление интеграла методом monte-carlo
+
+/*
+    вычисление интеграла методом выбора случайных чисел для оценки значений интеграла
+    случайным образом генерируются точки в заданной области и используются для оценки средней величины функции * S 
+*/
+
 double monte_carlo_integral(int num_points, int rank, int size, int variant)
 {
     int local_points = num_points / size;
@@ -63,7 +69,7 @@ double monte_carlo_integral(int num_points, int rank, int size, int variant)
 int main(int argc, char *argv[])
 {
     int rank, size;
-    int variants[] = {10000000, 100000000}; // 10^7 и 10^8
+    int variants[] = {10000000, 100000000};
     double global_results[2] = {0.0, 0.0};
 
     char *env_variant = getenv("VARIANT");
@@ -75,7 +81,7 @@ int main(int argc, char *argv[])
 
     if (env_variant != NULL)
     {
-        variant = atoi(env_variant) % 3 + 1;
+        variant = atoi(env_variant) % 3 + 1; // конвертация в строку и вычисление варианта по номеру в списке
         if (rank == 0)
         {
             printf("OUTPUT: Вариант: %d\n", variant);
@@ -86,13 +92,13 @@ int main(int argc, char *argv[])
 
     for (int i = 0; i < 2; i++)
     {
-        int n = pow(10, variants[i]);
+        int n = pow(10, variants[i]); // выбор n
 
         double start_time = MPI_Wtime(); // запуск таймера
 
-        double local_result = monte_carlo_integral(n, rank, size, variant); // вычисление локального интеграла
+        double local_result = monte_carlo_integral(n, rank, size, variant); // вычисление локальных интегралов на разных процессах
 
-        MPI_Reduce(&local_result, &global_results[i], 1, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD); // сложение результатов
+        MPI_Reduce(&local_result, &global_results[i], 1, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD); // сложение результатов всех процессов на 0
 
         double end_time = MPI_Wtime(); // стоп таймера
 

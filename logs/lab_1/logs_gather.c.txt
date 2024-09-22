@@ -1,23 +1,22 @@
-Wed Sep 18 19:56:03 UTC 2024
+Sun Sep 22 17:22:04 UTC 2024
+
+
 Запуск с 2 процессами:
 Пересборка и запуск сервиса: mpi-app-1
-mpi_2  | OUTPUT: Number of processes: 2, Message size: 1 bytes, Time: 0.000009 seconds
-mpi_2  | OUTPUT: Number of processes: 2, Message size: 1024 bytes, Time: 0.000003 seconds
-mpi_2  | OUTPUT: Number of processes: 2, Message size: 1048576 bytes, Time: 0.000866 seconds
+mpi_2  | OUTPUT: Сбор сообщений с размером 1024 байт завершен за 0.000024 секунд
+mpi_2  | OUTPUT: Сбор сообщений с размером 1048576 байт завершен за 0.000290 секунд
 
 
 Запуск с 4 процессами:
 Пересборка и запуск сервиса: mpi-app-2
-mpi_4  | OUTPUT: Number of processes: 4, Message size: 1 bytes, Time: 0.000022 seconds
-mpi_4  | OUTPUT: Number of processes: 4, Message size: 1024 bytes, Time: 0.000016 seconds
-mpi_4  | OUTPUT: Number of processes: 4, Message size: 1048576 bytes, Time: 0.003168 seconds
+mpi_4  | OUTPUT: Сбор сообщений с размером 1024 байт завершен за 0.000044 секунд
+mpi_4  | OUTPUT: Сбор сообщений с размером 1048576 байт завершен за 0.000566 секунд
 
 
 Запуск с 8 процессами:
 Пересборка и запуск сервиса: mpi-app-3
-mpi_8  | OUTPUT: Number of processes: 8, Message size: 1 bytes, Time: 0.000118 seconds
-mpi_8  | OUTPUT: Number of processes: 8, Message size: 1024 bytes, Time: 0.000115 seconds
-mpi_8  | OUTPUT: Number of processes: 8, Message size: 1048576 bytes, Time: 0.013569 seconds
+mpi_8  | OUTPUT: Сбор сообщений с размером 1024 байт завершен за 0.000055 секунд
+mpi_8  | OUTPUT: Сбор сообщений с размером 1048576 байт завершен за 0.011115 секунд
 
 
 Все контейнеры выполнены.
