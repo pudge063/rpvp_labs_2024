@@ -7,7 +7,7 @@ show_menu() {
 
 read_choice() {
     local choice
-    read -p "Введите номер программы (1-6): " choice
+    read -p "Введите номер программы (1-2): " choice
 
     case $choice in
     1)

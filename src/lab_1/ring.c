@@ -29,13 +29,16 @@ void ring_exchange(int size, int count, char *message) // количество �
     {
         if (rank == 0)
         {
-            MPI_Send(message, count, MPI_CHAR, next, 0, MPI_COMM_WORLD); // процесс отправляет сообщение следующему
+            MPI_Send(message, count, MPI_CHAR, next, 0, MPI_COMM_WORLD);          // процесс отправляет сообщение следующему
             MPI_Recv(message, count, MPI_CHAR, prev, 0, MPI_COMM_WORLD, &status); // процесс получает сообщение от предыдущего
+            printf("OUTPUT: PROCESS %d SENT MESSAGE TO PROCESS %d IN ITERATION %d\n", rank, next, i);
         }
         else
         {
             MPI_Recv(message, count, MPI_CHAR, prev, 0, MPI_COMM_WORLD, &status);
             MPI_Send(message, count, MPI_CHAR, next, 0, MPI_COMM_WORLD);
+            // printf("OUTPUT: to=%d rank=%d", next, i);
+            printf("OUTPUT: PROCESS %d SENT MESSAGE TO PROCESS %d IN ITERATION %d\n", rank, next, i);
         }
     }
 

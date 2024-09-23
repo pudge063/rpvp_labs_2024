@@ -4,6 +4,7 @@ FROM ubuntu:22.04
 ARG SOURCE_FILE
 ARG LAB_N
 ARG COMPILE_CMD
+ARG LANG
 
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -21,7 +22,7 @@ WORKDIR /app
 
 COPY /src/lab_${LAB_N} /app
 
-COPY /src/lab_${LAB_N}/${SOURCE_FILE} /app/test.c
+COPY /src/lab_${LAB_N}/${SOURCE_FILE} /app/test.${LANG}
 
 # RUN mpicc -o test test.c
 # RUN mpicc -o test test.c -lm

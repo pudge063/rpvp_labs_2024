@@ -1,22 +1,56 @@
-Sun Sep 22 17:28:07 UTC 2024
+Mon Sep 23 08:15:07 UTC 2024
 
 
 Запуск с 2 процессами:
 Пересборка и запуск сервиса: mpi-app-1
-mpi_2  | OUTPUT: Сбор сообщений с размером 1024 байт завершен за 0.000022 секунд
-mpi_2  | OUTPUT: Сбор сообщений с размером 1048576 байт завершен за 0.000313 секунд
+mpi_2  | OUTPUT: PROCESS 0 RECEIVED MESSAGE FROM PROCESS 0
+mpi_2  | OUTPUT: Номер процесса: 2, Размер сообщения: 1024 байт, Время: 0.000030 секунд
+mpi_2  | OUTPUT: Все процессы завершились в одно время.
+mpi_2  | OUTPUT: PROCESS 1 RECEIVED MESSAGE FROM PROCESS 0
+mpi_2  | OUTPUT: PROCESS 0 RECEIVED MESSAGE FROM PROCESS 0
+mpi_2  | OUTPUT: Номер процесса: 2, Размер сообщения: 1048576 байт, Время: 0.000538 секунд
+mpi_2  | OUTPUT: Все процессы завершились в одно время.
+mpi_2  | OUTPUT: PROCESS 1 RECEIVED MESSAGE FROM PROCESS 0
 
 
 Запуск с 4 процессами:
 Пересборка и запуск сервиса: mpi-app-2
-mpi_4  | OUTPUT: Сбор сообщений с размером 1024 байт завершен за 0.000039 секунд
-mpi_4  | OUTPUT: Сбор сообщений с размером 1048576 байт завершен за 0.001912 секунд
+mpi_4  | OUTPUT: PROCESS 1 RECEIVED MESSAGE FROM PROCESS 0
+mpi_4  | OUTPUT: PROCESS 2 RECEIVED MESSAGE FROM PROCESS 0
+mpi_4  | OUTPUT: PROCESS 3 RECEIVED MESSAGE FROM PROCESS 0
+mpi_4  | OUTPUT: PROCESS 0 RECEIVED MESSAGE FROM PROCESS 0
+mpi_4  | OUTPUT: Номер процесса: 4, Размер сообщения: 1024 байт, Время: 0.001188 секунд
+mpi_4  | OUTPUT: Все процессы завершились в одно время.
+mpi_4  | OUTPUT: PROCESS 0 RECEIVED MESSAGE FROM PROCESS 0
+mpi_4  | OUTPUT: Номер процесса: 4, Размер сообщения: 1048576 байт, Время: 0.000949 секунд
+mpi_4  | OUTPUT: Все процессы завершились в одно время.
+mpi_4  | OUTPUT: PROCESS 3 RECEIVED MESSAGE FROM PROCESS 0
+mpi_4  | OUTPUT: PROCESS 1 RECEIVED MESSAGE FROM PROCESS 0
+mpi_4  | OUTPUT: PROCESS 2 RECEIVED MESSAGE FROM PROCESS 0
 
 
 Запуск с 8 процессами:
 Пересборка и запуск сервиса: mpi-app-3
-mpi_8  | OUTPUT: Сбор сообщений с размером 1024 байт завершен за 0.000045 секунд
-mpi_8  | OUTPUT: Сбор сообщений с размером 1048576 байт завершен за 0.006002 секунд
+mpi_8  | OUTPUT: PROCESS 5 RECEIVED MESSAGE FROM PROCESS 0
+mpi_8  | OUTPUT: PROCESS 7 RECEIVED MESSAGE FROM PROCESS 0
+mpi_8  | OUTPUT: PROCESS 1 RECEIVED MESSAGE FROM PROCESS 0
+mpi_8  | OUTPUT: PROCESS 2 RECEIVED MESSAGE FROM PROCESS 0
+mpi_8  | OUTPUT: PROCESS 3 RECEIVED MESSAGE FROM PROCESS 0
+mpi_8  | OUTPUT: PROCESS 6 RECEIVED MESSAGE FROM PROCESS 0
+mpi_8  | OUTPUT: PROCESS 4 RECEIVED MESSAGE FROM PROCESS 0
+mpi_8  | OUTPUT: PROCESS 0 RECEIVED MESSAGE FROM PROCESS 0
+mpi_8  | OUTPUT: Номер процесса: 8, Размер сообщения: 1024 байт, Время: 0.007775 секунд
+mpi_8  | OUTPUT: Все процессы завершились в одно время.
+mpi_8  | OUTPUT: PROCESS 4 RECEIVED MESSAGE FROM PROCESS 0
+mpi_8  | OUTPUT: PROCESS 1 RECEIVED MESSAGE FROM PROCESS 0
+mpi_8  | OUTPUT: PROCESS 6 RECEIVED MESSAGE FROM PROCESS 0
+mpi_8  | OUTPUT: PROCESS 5 RECEIVED MESSAGE FROM PROCESS 0
+mpi_8  | OUTPUT: PROCESS 2 RECEIVED MESSAGE FROM PROCESS 0
+mpi_8  | OUTPUT: PROCESS 3 RECEIVED MESSAGE FROM PROCESS 0
+mpi_8  | OUTPUT: PROCESS 7 RECEIVED MESSAGE FROM PROCESS 0
+mpi_8  | OUTPUT: PROCESS 0 RECEIVED MESSAGE FROM PROCESS 0
+mpi_8  | OUTPUT: Номер процесса: 8, Размер сообщения: 1048576 байт, Время: 0.022017 секунд
+mpi_8  | OUTPUT: Все процессы завершились в одно время.
 
 
 Все контейнеры выполнены.
