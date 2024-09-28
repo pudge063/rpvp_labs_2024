@@ -1,113 +1,123 @@
+#include <mpi.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <mpi.h>
-#include <time.h>
 
-void initialize_matrix(float *A, int m, int n)
+#define MEMORY_LIMIT (8ULL * 1024 * 1024 * 1024) // 8 ГБ в байтах (используем 8ULL для обозначения беззнакового длинного целого)
+
+size_t calculate_max_n(size_t memory_limit, size_t num_processes)
 {
-    for (int i = 0; i < m; i++)
+    size_t size_of_float = sizeof(float);
+    size_t adjusted_memory_limit = memory_limit / num_processes; // делим память на количество процессов
+
+    size_t N = 1;
+    while (N * (N + 1) * size_of_float <= adjusted_memory_limit)
     {
-        for (int j = 0; j < n; j++)
-        {
-            A[i * n + j] = rand() % 10 + 1; // Изменено на случайные значения от 1 до 10
+        N++;
+    }
+
+    return N - 1; // возвращаем максимальный размер N
+}
+
+// функция для умножения части матрицы на вектор
+void matrix_vector_multiply(float *local_A, float *B, float *local_C, int local_rows, size_t N)
+{
+    for (int i = 0; i < local_rows; i++)
+    {
+        local_C[i] = 0.0;
+        for (size_t j = 0; j < N; j++)
+        { // изменено на size_t для N
+            local_C[i] += local_A[i * N + j] * B[j];
         }
     }
 }
 
-void initialize_vector(float *B, int n)
+int main(int argc, char **argv)
 {
-    for (int j = 0; j < n; j++)
-    {
-        B[j] = rand() % 10 + 1; // Изменено на случайные значения от 1 до 10
-    }
-}
-
-int main(int argc, char *argv[])
-{
-    int rank, size, m = 8, n = 8; // Примерные размеры
-    float *A = NULL;              // Полная матрица
-    float *full_A = NULL;         // Матрица для броадкаста
-    float *local_A = NULL;        // Локальная матрица
-    float *B = NULL;              // Вектор
-    float *C = NULL;              // Результат
-    float *local_C = NULL;        // Локальный результат
-
+    int rank, size;
     MPI_Init(&argc, &argv);
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
     MPI_Comm_size(MPI_COMM_WORLD, &size);
 
-    if (size > m)
-    {
-        if (rank == 0)
-        {
-            printf("Ошибка: количество процессов не может превышать количество строк матрицы.\n");
-        }
-        MPI_Finalize();
-        return 1;
-    }
-
-    srand(time(NULL) + rank);
-
+    // рассчитываем максимальный размер N в зависимости от количества процессов
+    size_t max_n = calculate_max_n(MEMORY_LIMIT, size);
     if (rank == 0)
     {
-        full_A = (float *)malloc(m * n * sizeof(float));
-        B = (float *)malloc(n * sizeof(float));
-        C = (float *)malloc(m * sizeof(float));
-        initialize_matrix(full_A, m, n);
-        initialize_vector(B, n);
-
-        printf("OUTPUT: Матрица (%d x %d):\n", m, n);
-        for (int i = 0; i < m; i++)
-        {
-            for (int j = 0; j < n; j++)
-            {
-                printf("%8.2f ", full_A[i * n + j]);
-            }
-            printf("\n");
-        }
-
-        printf("OUTPUT: Вектор B: ");
-        for (int j = 0; j < n; j++)
-        {
-            printf("%f ", B[j]);
-        }
-        printf("\n");
+        printf("OUTPUT: Для %d процессов: Максимальный размер матрицы N = %zu\n", size, max_n);
     }
 
-    MPI_Bcast(full_A, m * n, MPI_FLOAT, 0, MPI_COMM_WORLD);
-    B = (float *)malloc(n * sizeof(float));
-    MPI_Bcast(B, n, MPI_FLOAT, 0, MPI_COMM_WORLD);
+    // обновляем размер матрицы на основе вычисленного максимального N
 
-    local_A = (float *)malloc((m / size) * n * sizeof(float));
-    MPI_Scatter(full_A, (m / size) * n, MPI_FLOAT, local_A, (m / size) * n, MPI_FLOAT, 0, MPI_COMM_WORLD);
+    int N = 15000; // размер матрицы
 
-    local_C = (float *)calloc(m / size, sizeof(float)); // Инициализация локального результата нулями
+    int local_rows = N / size;                         // Количество строк, обрабатываемых каждым процессом
+    float *A = (float *)malloc(N * N * sizeof(float)); // Исходная матрица
+    float *B = (float *)malloc(N * sizeof(float));     // Вектор
+    float *C = (float *)malloc(N * sizeof(float));     // Результирующий вектор
+    float *local_A = (float *)malloc(local_rows * N * sizeof(float));
+    float *local_C = (float *)malloc(local_rows * sizeof(float));
 
-    for (int i = 0; i < m / size; i++)
-    {
-        for (int j = 0; j < n; j++)
-        {
-            local_C[i] += local_A[i * n + j] * B[j];
-            printf("OUTPUT (Process %d): local_A[%d][%d] = %f, B[%d] = %f, local_C[%d] += %f\n",
-                   rank, i, j, local_A[i * n + j], j, B[j], i, local_A[i * n + j] * B[j]);
-        }
-    }
-
-    C = (float *)calloc(m, sizeof(float)); // Инициализация полного результата нулями
-    MPI_Gather(local_C, m / size, MPI_FLOAT, C, m / size, MPI_FLOAT, 0, MPI_COMM_WORLD);
-
+    // инициализация матрицы и вектора только в процессе с rank 0
     if (rank == 0)
     {
-        printf("OUTPUT: Результат умножения матрицы на вектор:\n");
-        for (int i = 0; i < m; i++)
+        for (int i = 0; i < N * N; i++)
         {
-            printf("OUTPUT: C[%d] = %f\n", i, C[i]);
+            A[i] = i + 1;
         }
-        free(full_A);
-        free(B);
-        free(C);
+        for (int i = 0; i < N; i++)
+        {
+            B[i] = i + 1;
+        }
     }
 
+    // разделяем матрицу по процессам
+    MPI_Scatter(
+        A,               // атрибуты А -  буфер отправки (исх. матрица)
+        local_rows * N,  // количество элементов
+        MPI_FLOAT,       // типп данных
+        local_A,         // буфер получения
+        local_rows * N,  // recv count - сколько получит каждый процесс
+        MPI_FLOAT,       // тип данных
+        0,               // ранг процесса отправителя (root)
+        MPI_COMM_WORLD); // коммуникатор
+
+    // распространяем вектор B по всем процессам
+    MPI_Bcast(
+        B, // буфер отправки
+        N, // количество элементов
+        MPI_FLOAT, // тип данных
+        0, // ранг процесса транслятор
+        MPI_COMM_WORLD); // коммуникатор
+
+    double start_time = MPI_Wtime(); // начало замера времени
+
+    // локальное умножение части матрицы на вектор
+    matrix_vector_multiply(local_A, B, local_C, local_rows, N);
+
+    // собираем результат в процесс 0 (отправитель, получатель, ранг получателя)
+    MPI_Gather(local_C, local_rows, MPI_FLOAT, C, local_rows, MPI_FLOAT, 0, MPI_COMM_WORLD);
+
+    // все данные собираем на процесс 0
+
+    // завершаем замер времени
+    double end_time = MPI_Wtime();
+
+    // процесс с rank 0 выводит результат и время выполнения
+    if (rank == 0)
+    {
+        // printf("OUTPUT: Результат умножения матрицы на вектор:\n");
+        for (int i = 0; i < N; i++)
+        {
+            // printf("OUTPUT: C[%d] = %f\n", i, C[i]);
+        }
+
+        double serial_time = end_time - start_time;
+
+        printf("OUTPUT: Время выполнения на %d процессах: S(%d) = %f\n", size, size, serial_time);
+    }
+
+    free(A);
+    free(B);
+    free(C);
     free(local_A);
     free(local_C);
     MPI_Finalize();

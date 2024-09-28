@@ -5,9 +5,7 @@
 #define COUNT_1KB 1024
 #define COUNT_1MB (1024 * 1024)
 
-// реализация функции MPI_Bcast - процесс с рангом 0 передаёт сообщения всем остальынм процессам
-
-void broadcast_test(int size, int count)
+void manual_broadcast(int size, int count)
 {
     int rank, num_procs;
     MPI_Status status;
@@ -21,11 +19,24 @@ void broadcast_test(int size, int count)
 
     if (rank == 0)
     {
+        for (int i = 0; i < count; i++)
+        {
+            buffer[i] = 'A';
+        }
         start_time = MPI_Wtime();
-    }
 
-    // реализация broadcast: буфер, передаваемые данные, тип данных, ранг процесса инициатора, коммуникатор
-    MPI_Bcast(buffer, count, MPI_CHAR, 0, MPI_COMM_WORLD);
+        for (int i = 1; i < num_procs; i++)
+        {
+            MPI_Send(buffer, count, MPI_CHAR, i, 0, MPI_COMM_WORLD);
+        }
+
+        printf("OUTPUT: PROCESS %d SENT MESSAGE TO ALL PROCESSES\n", rank);
+    }
+    else
+    {
+        MPI_Recv(buffer, count, MPI_CHAR, 0, 0, MPI_COMM_WORLD, &status);
+        printf("OUTPUT: PROCESS %d RECEIVED MESSAGE FROM PROCESS 0\n", rank);
+    }
 
     if (rank == 0)
     {
@@ -41,19 +52,19 @@ void broadcast_test(int size, int count)
         printf("OUTPUT: Все процессы завершились в одно время.\n");
     }
 
-    // free(buffer);
+    free(buffer);
 }
 
 int main(int argc, char *argv[])
 {
     MPI_Init(&argc, &argv);
 
-    // int rank, num_procs;
-    // MPI_Comm_rank(MPI_COMM_WORLD, &rank);
-    // MPI_Comm_size(MPI_COMM_WORLD, &num_procs);
+    int rank, num_procs;
+    MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+    MPI_Comm_size(MPI_COMM_WORLD, &num_procs);
 
-    broadcast_test(num_procs, COUNT_1KB);
-    broadcast_test(num_procs, COUNT_1MB);
+    manual_broadcast(num_procs, COUNT_1KB);
+    manual_broadcast(num_procs, COUNT_1MB);
 
     MPI_Finalize();
     return 0;

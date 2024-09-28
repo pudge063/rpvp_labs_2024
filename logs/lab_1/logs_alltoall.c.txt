@@ -1,19 +1,103 @@
-Sun Sep 22 19:06:04 UTC 2024
+Mon Sep 23 08:08:52 UTC 2024
 
 
 Запуск с 2 процессами:
 Пересборка и запуск сервиса: mpi-app-1
-mpi_2  | OUTPUT: Время для all-to-all передачи на 2 процессах: 0.000021 секунд
+mpi_2  | OUTPUT: PROCESS 1: Отправлено 1024 байт на процесс 0
+mpi_2  | OUTPUT: PROCESS 1: Отправлено 1024 байт на процесс 1
+mpi_2  | OUTPUT: PROCESS 0: Отправлено 1024 байт на процесс 0
+mpi_2  | OUTPUT: PROCESS 0: Отправлено 1024 байт на процесс 1
+mpi_2  | OUTPUT: Время для all-to-all передачи на 2 процессах: 0.000045 секунд
 
 
 Запуск с 4 процессами:
 Пересборка и запуск сервиса: mpi-app-2
-mpi_4  | OUTPUT: Время для all-to-all передачи на 4 процессах: 0.000216 секунд
+mpi_4  | OUTPUT: PROCESS 2: Отправлено 1024 байт на процесс 0
+mpi_4  | OUTPUT: PROCESS 2: Отправлено 1024 байт на процесс 1
+mpi_4  | OUTPUT: PROCESS 2: Отправлено 1024 байт на процесс 2
+mpi_4  | OUTPUT: PROCESS 2: Отправлено 1024 байт на процесс 3
+mpi_4  | OUTPUT: PROCESS 3: Отправлено 1024 байт на процесс 0
+mpi_4  | OUTPUT: PROCESS 3: Отправлено 1024 байт на процесс 1
+mpi_4  | OUTPUT: PROCESS 3: Отправлено 1024 байт на процесс 2
+mpi_4  | OUTPUT: PROCESS 3: Отправлено 1024 байт на процесс 3
+mpi_4  | OUTPUT: PROCESS 0: Отправлено 1024 байт на процесс 0
+mpi_4  | OUTPUT: PROCESS 0: Отправлено 1024 байт на процесс 1
+mpi_4  | OUTPUT: PROCESS 0: Отправлено 1024 байт на процесс 2
+mpi_4  | OUTPUT: PROCESS 0: Отправлено 1024 байт на процесс 3
+mpi_4  | OUTPUT: Время для all-to-all передачи на 4 процессах: 0.000153 секунд
+mpi_4  | OUTPUT: PROCESS 1: Отправлено 1024 байт на процесс 0
+mpi_4  | OUTPUT: PROCESS 1: Отправлено 1024 байт на процесс 1
+mpi_4  | OUTPUT: PROCESS 1: Отправлено 1024 байт на процесс 2
+mpi_4  | OUTPUT: PROCESS 1: Отправлено 1024 байт на процесс 3
 
 
 Запуск с 8 процессами:
 Пересборка и запуск сервиса: mpi-app-3
-mpi_8  | OUTPUT: Время для all-to-all передачи на 8 процессах: 0.002256 секунд
+mpi_8  | OUTPUT: PROCESS 0: Отправлено 1024 байт на процесс 0
+mpi_8  | OUTPUT: PROCESS 0: Отправлено 1024 байт на процесс 1
+mpi_8  | OUTPUT: PROCESS 0: Отправлено 1024 байт на процесс 2
+mpi_8  | OUTPUT: PROCESS 0: Отправлено 1024 байт на процесс 3
+mpi_8  | OUTPUT: PROCESS 0: Отправлено 1024 байт на процесс 4
+mpi_8  | OUTPUT: PROCESS 0: Отправлено 1024 байт на процесс 5
+mpi_8  | OUTPUT: PROCESS 0: Отправлено 1024 байт на процесс 6
+mpi_8  | OUTPUT: PROCESS 0: Отправлено 1024 байт на процесс 7
+mpi_8  | OUTPUT: Время для all-to-all передачи на 8 процессах: 0.003173 секунд
+mpi_8  | OUTPUT: PROCESS 1: Отправлено 1024 байт на процесс 0
+mpi_8  | OUTPUT: PROCESS 1: Отправлено 1024 байт на процесс 1
+mpi_8  | OUTPUT: PROCESS 1: Отправлено 1024 байт на процесс 2
+mpi_8  | OUTPUT: PROCESS 1: Отправлено 1024 байт на процесс 3
+mpi_8  | OUTPUT: PROCESS 1: Отправлено 1024 байт на процесс 4
+mpi_8  | OUTPUT: PROCESS 1: Отправлено 1024 байт на процесс 5
+mpi_8  | OUTPUT: PROCESS 1: Отправлено 1024 байт на процесс 6
+mpi_8  | OUTPUT: PROCESS 1: Отправлено 1024 байт на процесс 7
+mpi_8  | OUTPUT: PROCESS 2: Отправлено 1024 байт на процесс 0
+mpi_8  | OUTPUT: PROCESS 2: Отправлено 1024 байт на процесс 1
+mpi_8  | OUTPUT: PROCESS 2: Отправлено 1024 байт на процесс 2
+mpi_8  | OUTPUT: PROCESS 2: Отправлено 1024 байт на процесс 3
+mpi_8  | OUTPUT: PROCESS 2: Отправлено 1024 байт на процесс 4
+mpi_8  | OUTPUT: PROCESS 2: Отправлено 1024 байт на процесс 5
+mpi_8  | OUTPUT: PROCESS 2: Отправлено 1024 байт на процесс 6
+mpi_8  | OUTPUT: PROCESS 2: Отправлено 1024 байт на процесс 7
+mpi_8  | OUTPUT: PROCESS 3: Отправлено 1024 байт на процесс 0
+mpi_8  | OUTPUT: PROCESS 3: Отправлено 1024 байт на процесс 1
+mpi_8  | OUTPUT: PROCESS 3: Отправлено 1024 байт на процесс 2
+mpi_8  | OUTPUT: PROCESS 3: Отправлено 1024 байт на процесс 3
+mpi_8  | OUTPUT: PROCESS 3: Отправлено 1024 байт на процесс 4
+mpi_8  | OUTPUT: PROCESS 3: Отправлено 1024 байт на процесс 5
+mpi_8  | OUTPUT: PROCESS 3: Отправлено 1024 байт на процесс 6
+mpi_8  | OUTPUT: PROCESS 3: Отправлено 1024 байт на процесс 7
+mpi_8  | OUTPUT: PROCESS 4: Отправлено 1024 байт на процесс 0
+mpi_8  | OUTPUT: PROCESS 4: Отправлено 1024 байт на процесс 1
+mpi_8  | OUTPUT: PROCESS 4: Отправлено 1024 байт на процесс 2
+mpi_8  | OUTPUT: PROCESS 4: Отправлено 1024 байт на процесс 3
+mpi_8  | OUTPUT: PROCESS 4: Отправлено 1024 байт на процесс 4
+mpi_8  | OUTPUT: PROCESS 4: Отправлено 1024 байт на процесс 5
+mpi_8  | OUTPUT: PROCESS 4: Отправлено 1024 байт на процесс 6
+mpi_8  | OUTPUT: PROCESS 4: Отправлено 1024 байт на процесс 7
+mpi_8  | OUTPUT: PROCESS 5: Отправлено 1024 байт на процесс 0
+mpi_8  | OUTPUT: PROCESS 5: Отправлено 1024 байт на процесс 1
+mpi_8  | OUTPUT: PROCESS 5: Отправлено 1024 байт на процесс 2
+mpi_8  | OUTPUT: PROCESS 5: Отправлено 1024 байт на процесс 3
+mpi_8  | OUTPUT: PROCESS 5: Отправлено 1024 байт на процесс 4
+mpi_8  | OUTPUT: PROCESS 5: Отправлено 1024 байт на процесс 5
+mpi_8  | OUTPUT: PROCESS 5: Отправлено 1024 байт на процесс 6
+mpi_8  | OUTPUT: PROCESS 5: Отправлено 1024 байт на процесс 7
+mpi_8  | OUTPUT: PROCESS 6: Отправлено 1024 байт на процесс 0
+mpi_8  | OUTPUT: PROCESS 6: Отправлено 1024 байт на процесс 1
+mpi_8  | OUTPUT: PROCESS 6: Отправлено 1024 байт на процесс 2
+mpi_8  | OUTPUT: PROCESS 6: Отправлено 1024 байт на процесс 3
+mpi_8  | OUTPUT: PROCESS 6: Отправлено 1024 байт на процесс 4
+mpi_8  | OUTPUT: PROCESS 6: Отправлено 1024 байт на процесс 5
+mpi_8  | OUTPUT: PROCESS 6: Отправлено 1024 байт на процесс 6
+mpi_8  | OUTPUT: PROCESS 6: Отправлено 1024 байт на процесс 7
+mpi_8  | OUTPUT: PROCESS 7: Отправлено 1024 байт на процесс 0
+mpi_8  | OUTPUT: PROCESS 7: Отправлено 1024 байт на процесс 1
+mpi_8  | OUTPUT: PROCESS 7: Отправлено 1024 байт на процесс 2
+mpi_8  | OUTPUT: PROCESS 7: Отправлено 1024 байт на процесс 3
+mpi_8  | OUTPUT: PROCESS 7: Отправлено 1024 байт на процесс 4
+mpi_8  | OUTPUT: PROCESS 7: Отправлено 1024 байт на процесс 5
+mpi_8  | OUTPUT: PROCESS 7: Отправлено 1024 байт на процесс 6
+mpi_8  | OUTPUT: PROCESS 7: Отправлено 1024 байт на процесс 7
 
 
 Все контейнеры выполнены.

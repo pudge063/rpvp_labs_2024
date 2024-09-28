@@ -48,7 +48,7 @@ read_choice() {
 
 show_menu
 read_choice
-
+LANG="c"
 source runs/lab_$LAB_N.sh
 
 LOG_FILE="logs/lab_$LAB_N/logs_$SOURCE_FILE.txt"
@@ -69,6 +69,7 @@ run_container() {
     export COMPILE_CMD
     export VARIANT
     export MATRIX_ARGS
+    export LANG
 
     docker-compose build "$service_name" | tee -a "$DEBUG_LOG_FILE"
 

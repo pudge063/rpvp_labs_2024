@@ -1,10 +1,10 @@
-Sun Sep 22 20:13:49 UTC 2024
+Mon Sep 23 06:37:29 UTC 2024
 
 
 Запуск с 2 процессами:
 Пересборка и запуск сервиса: mpi-app-1
-mpi_2  | OUTPUT: rank=0 B=1
 mpi_2  | OUTPUT: rank=1 B=0
+mpi_2  | OUTPUT: rank=0 B=1
 
 
 Запуск с 4 процессами:
@@ -17,14 +17,14 @@ mpi_4  | OUTPUT: rank=3 B=2
 
 Запуск с 8 процессами:
 Пересборка и запуск сервиса: mpi-app-3
-mpi_8  | OUTPUT: rank=7 B=6
-mpi_8  | OUTPUT: rank=0 B=7
 mpi_8  | OUTPUT: rank=1 B=0
 mpi_8  | OUTPUT: rank=4 B=3
 mpi_8  | OUTPUT: rank=5 B=4
-mpi_8  | OUTPUT: rank=6 B=5
+mpi_8  | OUTPUT: rank=7 B=6
+mpi_8  | OUTPUT: rank=0 B=7
 mpi_8  | OUTPUT: rank=2 B=1
 mpi_8  | OUTPUT: rank=3 B=2
+mpi_8  | OUTPUT: rank=6 B=5
 
 
 Все контейнеры выполнены.

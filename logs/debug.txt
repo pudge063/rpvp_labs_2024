@@ -1,11 +1,11 @@
 #0 building with "desktop-linux" instance using docker driver
 
 #1 [mpi-app-1 internal] load build definition from Dockerfile
-#1 transferring dockerfile: 628B done
+#1 transferring dockerfile: 643B done
 #1 DONE 0.0s
 
 #2 [mpi-app-1 internal] load metadata for docker.io/library/ubuntu:22.04
-#2 DONE 0.7s
+#2 DONE 1.9s
 
 #3 [mpi-app-1 internal] load .dockerignore
 #3 transferring context: 2B done
@@ -15,7 +15,7 @@
 #4 DONE 0.0s
 
 #5 [mpi-app-1 internal] load build context
-#5 transferring context: 1.91kB done
+#5 transferring context: 4.61kB done
 #5 DONE 0.0s
 
 #6 [mpi-app-1 2/7] RUN apt-get update &&     apt-get install -y     build-essential     openmpi-bin openmpi-common libopenmpi-dev      && rm -rf /var/lib/apt/lists/*
@@ -24,10 +24,10 @@
 #7 [mpi-app-1 3/7] WORKDIR /app
 #7 CACHED
 
-#8 [mpi-app-1 4/7] COPY /src/lab_4 /app
+#8 [mpi-app-1 4/7] COPY /src/lab_3 /app
 #8 DONE 0.0s
 
-#9 [mpi-app-1 5/7] COPY /src/lab_4/ring_shift_2.c /app/test.c
+#9 [mpi-app-1 5/7] COPY /src/lab_3/sgemv.c /app/test.c
 #9 DONE 0.0s
 
 #10 [mpi-app-1 6/7] RUN mpicc -o test test.c -lm
@@ -38,22 +38,20 @@
 
 #12 [mpi-app-1] exporting to image
 #12 exporting layers 0.0s done
-#12 writing image sha256:c832a01178872cac78ba40e2a8f802ce64dbd150d980606a48ff22251c05fa0a done
-#12 naming to docker.io/library/files-mpi-app-1
+#12 writing image sha256:daf4b62d170e1f16a433c3b6bb76bf6a6eea2471d34767456fcbc8af85261b94 done
 #12 naming to docker.io/library/files-mpi-app-1 done
 #12 DONE 0.0s
 
 #13 [mpi-app-1] resolving provenance for metadata file
 #13 DONE 0.0s
-Attaching to mpi_2
-mpi_2  | OUTPUT: Процесс 0 отправляет: 100
-mpi_2  | OUTPUT: Процесс 0 завершил с получением: 101
-mpi_2  | OUTPUT: Процесс 1 получил: 100
-[Kmpi_2 exited with code 0
+Attaching to mpi_1
+mpi_1  | OUTPUT: Для 1 процессов: Максимальный размер матрицы N = 46340
+mpi_1  | OUTPUT: Время выполнения на 1 процессах: S(1) = 1.231106
+[Kmpi_1 exited with code 0
 #0 building with "desktop-linux" instance using docker driver
 
 #1 [mpi-app-2 internal] load build definition from Dockerfile
-#1 transferring dockerfile: 628B done
+#1 transferring dockerfile: 643B done
 #1 DONE 0.0s
 
 #2 [mpi-app-2 internal] load metadata for docker.io/library/ubuntu:22.04
@@ -67,22 +65,22 @@ mpi_2  | OUTPUT: Процесс 1 получил: 100
 #4 DONE 0.0s
 
 #5 [mpi-app-2 internal] load build context
-#5 transferring context: 290B done
+#5 transferring context: 202B done
 #5 DONE 0.0s
 
-#6 [mpi-app-2 3/7] WORKDIR /app
+#6 [mpi-app-2 2/7] RUN apt-get update &&     apt-get install -y     build-essential     openmpi-bin openmpi-common libopenmpi-dev      && rm -rf /var/lib/apt/lists/*
 #6 CACHED
 
-#7 [mpi-app-2 2/7] RUN apt-get update &&     apt-get install -y     build-essential     openmpi-bin openmpi-common libopenmpi-dev      && rm -rf /var/lib/apt/lists/*
+#7 [mpi-app-2 3/7] WORKDIR /app
 #7 CACHED
 
-#8 [mpi-app-2 4/7] COPY /src/lab_4 /app
+#8 [mpi-app-2 6/7] RUN mpicc -o test test.c -lm
 #8 CACHED
 
-#9 [mpi-app-2 5/7] COPY /src/lab_4/ring_shift_2.c /app/test.c
+#9 [mpi-app-2 4/7] COPY /src/lab_3 /app
 #9 CACHED
 
-#10 [mpi-app-2 6/7] RUN mpicc -o test test.c -lm
+#10 [mpi-app-2 5/7] COPY /src/lab_3/sgemv.c /app/test.c
 #10 CACHED
 
 #11 [mpi-app-2 7/7] RUN chmod +x /app/test
@@ -90,23 +88,20 @@ mpi_2  | OUTPUT: Процесс 1 получил: 100
 
 #12 [mpi-app-2] exporting to image
 #12 exporting layers done
-#12 writing image sha256:acb3fab0be433d05a0d2bc588a0cc8216d820a2203f35aa399c4044247390a0c done
+#12 writing image sha256:cba9315459a0c26d9201948c8ccabd373b78e71e5d8bd93d5658ee6f12cc8258 done
 #12 naming to docker.io/library/files-mpi-app-2 done
 #12 DONE 0.0s
 
 #13 [mpi-app-2] resolving provenance for metadata file
 #13 DONE 0.0s
 Attaching to mpi_4
-mpi_4  | OUTPUT: Процесс 0 отправляет: 100
-mpi_4  | OUTPUT: Процесс 0 завершил с получением: 103
-mpi_4  | OUTPUT: Процесс 1 получил: 100
-mpi_4  | OUTPUT: Процесс 2 получил: 101
-mpi_4  | OUTPUT: Процесс 3 получил: 102
+mpi_4  | OUTPUT: Для 4 процессов: Максимальный размер матрицы N = 23169
+mpi_4  | OUTPUT: Время выполнения на 4 процессах: S(4) = 0.219006
 [Kmpi_4 exited with code 0
 #0 building with "desktop-linux" instance using docker driver
 
 #1 [mpi-app-3 internal] load build definition from Dockerfile
-#1 transferring dockerfile: 628B done
+#1 transferring dockerfile: 643B done
 #1 DONE 0.0s
 
 #2 [mpi-app-3 internal] load metadata for docker.io/library/ubuntu:22.04
@@ -120,22 +115,22 @@ mpi_4  | OUTPUT: Процесс 3 получил: 102
 #4 DONE 0.0s
 
 #5 [mpi-app-3 internal] load build context
-#5 transferring context: 290B done
+#5 transferring context: 202B done
 #5 DONE 0.0s
 
 #6 [mpi-app-3 2/7] RUN apt-get update &&     apt-get install -y     build-essential     openmpi-bin openmpi-common libopenmpi-dev      && rm -rf /var/lib/apt/lists/*
 #6 CACHED
 
-#7 [mpi-app-3 3/7] WORKDIR /app
+#7 [mpi-app-3 5/7] COPY /src/lab_3/sgemv.c /app/test.c
 #7 CACHED
 
-#8 [mpi-app-3 4/7] COPY /src/lab_4 /app
+#8 [mpi-app-3 3/7] WORKDIR /app
 #8 CACHED
 
-#9 [mpi-app-3 5/7] COPY /src/lab_4/ring_shift_2.c /app/test.c
+#9 [mpi-app-3 6/7] RUN mpicc -o test test.c -lm
 #9 CACHED
 
-#10 [mpi-app-3 6/7] RUN mpicc -o test test.c -lm
+#10 [mpi-app-3 4/7] COPY /src/lab_3 /app
 #10 CACHED
 
 #11 [mpi-app-3 7/7] RUN chmod +x /app/test
@@ -143,20 +138,13 @@ mpi_4  | OUTPUT: Процесс 3 получил: 102
 
 #12 [mpi-app-3] exporting to image
 #12 exporting layers done
-#12 writing image sha256:81c6bcdc60536ad6cc6f8d8c48053afc99a9508e6193bf537df0520f14dccd77 done
+#12 writing image sha256:ea59dfae7451bd637a785b1849bf3fdf8850bc64491fbc0b96dd3dff55c8476f done
 #12 naming to docker.io/library/files-mpi-app-3 done
 #12 DONE 0.0s
 
 #13 [mpi-app-3] resolving provenance for metadata file
 #13 DONE 0.0s
 Attaching to mpi_8
-mpi_8  | OUTPUT: Процесс 3 получил: 102
-mpi_8  | OUTPUT: Процесс 4 получил: 103
-mpi_8  | OUTPUT: Процесс 5 получил: 104
-mpi_8  | OUTPUT: Процесс 0 отправляет: 100
-mpi_8  | OUTPUT: Процесс 1 получил: 100
-mpi_8  | OUTPUT: Процесс 2 получил: 101
-mpi_8  | OUTPUT: Процесс 7 получил: 106
-mpi_8  | OUTPUT: Процесс 0 завершил с получением: 107
-mpi_8  | OUTPUT: Процесс 6 получил: 105
+mpi_8  | OUTPUT: Для 8 процессов: Максимальный размер матрицы N = 16383
+mpi_8  | OUTPUT: Время выполнения на 8 процессах: S(8) = 0.158879
 [Kmpi_8 exited with code 0
