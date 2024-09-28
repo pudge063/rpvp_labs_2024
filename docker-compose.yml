@@ -10,7 +10,7 @@ services:
     container_name: mpi_${MPI_CONTAINER_1}
     environment:
       - VARIANT=${VARIANT}
-    command: [ "mpirun", "--allow-run-as-root", "-np", "${MPI_CONTAINER_1}", "./test" , "$MATRIX_ARGS", "$MATRIX_ARGS", "$MATRIX_ARGS"]
+    command: [ "mpirun", "--allow-run-as-root", "-np", "${MPI_CONTAINER_1}", "./test" , "$N_ARG"]
   mpi-app-2:
     build:
       context: .
@@ -22,7 +22,7 @@ services:
     container_name: mpi_${MPI_CONTAINER_2}
     environment:
       - VARIANT=${VARIANT}
-    command: [ "mpirun", "--allow-run-as-root", "-np", "${MPI_CONTAINER_2}", "./test", "$MATRIX_ARGS", "$MATRIX_ARGS", "$MATRIX_ARGS" ]
+    command: [ "mpirun", "--allow-run-as-root", "-np", "${MPI_CONTAINER_2}", "./test", "$N_ARG" ]
 
   mpi-app-3:
     build:
@@ -35,4 +35,4 @@ services:
     container_name: mpi_${MPI_CONTAINER_3}
     environment:
       - VARIANT=${VARIANT}
-    command: [ "mpirun", "--allow-run-as-root", "-np", "${MPI_CONTAINER_3}", "./test", "$MATRIX_ARGS", "$MATRIX_ARGS", "$MATRIX_ARGS" ]
+    command: [ "mpirun", "--allow-run-as-root", "-np", "${MPI_CONTAINER_3}", "./test", "$N_ARG" ]
