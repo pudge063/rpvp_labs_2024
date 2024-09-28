@@ -18,19 +18,19 @@
 #5 transferring context: 346B done
 #5 DONE 0.0s
 
-#6 [mpi-app-1 2/7] RUN apt-get update &&     apt-get install -y     build-essential     openmpi-bin openmpi-common libopenmpi-dev      && rm -rf /var/lib/apt/lists/*
+#6 [mpi-app-1 3/7] WORKDIR /app
 #6 CACHED
 
-#7 [mpi-app-1 4/7] COPY /src/lab_6 /app
+#7 [mpi-app-1 5/7] COPY /src/lab_6/start.cpp /app/test.cpp
 #7 CACHED
 
-#8 [mpi-app-1 3/7] WORKDIR /app
+#8 [mpi-app-1 2/7] RUN apt-get update &&     apt-get install -y     build-essential     openmpi-bin openmpi-common libopenmpi-dev      && rm -rf /var/lib/apt/lists/*
 #8 CACHED
 
-#9 [mpi-app-1 6/7] RUN mpicxx -o test ./test.cpp
+#9 [mpi-app-1 4/7] COPY /src/lab_6 /app
 #9 CACHED
 
-#10 [mpi-app-1 5/7] COPY /src/lab_6/start.cpp /app/test.cpp
+#10 [mpi-app-1 6/7] RUN mpicxx -o test ./test.cpp
 #10 CACHED
 
 #11 [mpi-app-1 7/7] RUN chmod +x /app/test
@@ -38,24 +38,25 @@
 
 #12 [mpi-app-1] exporting to image
 #12 exporting layers done
-#12 writing image sha256:a26827236eba960b323efaad317468c23ea2ac4273a566a5fedbf281e3d54ffa done
+#12 writing image sha256:b8239a684bb467bfa9af5f32941c4ac26d0d22c1bcd051ba99dcfe689cb571df done
 #12 naming to docker.io/library/files-mpi-app-1 done
 #12 DONE 0.0s
 
 #13 [mpi-app-1] resolving provenance for metadata file
 #13 DONE 0.0s
-Attaching to mpi_1
-mpi_1  | OUTPUT: Процесс 0 завершил за 0 секунд.
-mpi_1  | OUTPUT: Результирующая матрица C:
-mpi_1  | OUTPUT: 16.000000 OUTPUT: 20.000000 OUTPUT: 16.000000 OUTPUT: 20.000000 OUTPUT: 16.000000 OUTPUT: 20.000000 OUTPUT: 16.000000 OUTPUT: 20.000000 
-mpi_1  | OUTPUT: 20.000000 OUTPUT: 24.000000 OUTPUT: 20.000000 OUTPUT: 24.000000 OUTPUT: 20.000000 OUTPUT: 24.000000 OUTPUT: 20.000000 OUTPUT: 24.000000 
-mpi_1  | OUTPUT: 24.000000 OUTPUT: 28.000000 OUTPUT: 24.000000 OUTPUT: 28.000000 OUTPUT: 24.000000 OUTPUT: 28.000000 OUTPUT: 24.000000 OUTPUT: 28.000000 
-mpi_1  | OUTPUT: 28.000000 OUTPUT: 32.000000 OUTPUT: 28.000000 OUTPUT: 32.000000 OUTPUT: 28.000000 OUTPUT: 32.000000 OUTPUT: 28.000000 OUTPUT: 32.000000 
-mpi_1  | OUTPUT: 32.000000 OUTPUT: 36.000000 OUTPUT: 32.000000 OUTPUT: 36.000000 OUTPUT: 32.000000 OUTPUT: 36.000000 OUTPUT: 32.000000 OUTPUT: 36.000000 
-mpi_1  | OUTPUT: 36.000000 OUTPUT: 40.000000 OUTPUT: 36.000000 OUTPUT: 40.000000 OUTPUT: 36.000000 OUTPUT: 40.000000 OUTPUT: 36.000000 OUTPUT: 40.000000 
-mpi_1  | OUTPUT: 40.000000 OUTPUT: 44.000000 OUTPUT: 40.000000 OUTPUT: 44.000000 OUTPUT: 40.000000 OUTPUT: 44.000000 OUTPUT: 40.000000 OUTPUT: 44.000000 
-mpi_1  | OUTPUT: 44.000000 OUTPUT: 48.000000 OUTPUT: 44.000000 OUTPUT: 48.000000 OUTPUT: 44.000000 OUTPUT: 48.000000 OUTPUT: 44.000000 OUTPUT: 48.000000 
-[Kmpi_1 exited with code 0
+Attaching to mpi_2
+mpi_2  | OUTPUT: Матрица A размером 8x4
+mpi_2  | OUTPUT: Матрица B размером 4x4
+mpi_2  | OUTPUT: Результирующая матрица C:
+mpi_2  | OUTPUT: 4.000000 6.000000 4.000000 6.000000 
+mpi_2  | OUTPUT: 12.000000 14.000000 12.000000 14.000000 
+mpi_2  | OUTPUT: 20.000000 22.000000 20.000000 22.000000 
+mpi_2  | OUTPUT: 28.000000 30.000000 28.000000 30.000000 
+mpi_2  | OUTPUT: 36.000000 38.000000 36.000000 38.000000 
+mpi_2  | OUTPUT: 44.000000 46.000000 44.000000 46.000000 
+mpi_2  | OUTPUT: 0.000000 0.000000 0.000000 0.000000 
+mpi_2  | OUTPUT: 0.000000 0.000000 0.000000 0.000000 
+[Kmpi_2 exited with code 0
 #0 building with "desktop-linux" instance using docker driver
 
 #1 [mpi-app-2 internal] load build definition from Dockerfile
@@ -63,7 +64,7 @@ mpi_1  | OUTPUT: 44.000000 OUTPUT: 48.000000 OUTPUT: 44.000000 OUTPUT: 48.000000
 #1 DONE 0.0s
 
 #2 [mpi-app-2 internal] load metadata for docker.io/library/ubuntu:22.04
-#2 DONE 0.3s
+#2 DONE 0.4s
 
 #3 [mpi-app-2 internal] load .dockerignore
 #3 transferring context: 2B done
@@ -76,19 +77,19 @@ mpi_1  | OUTPUT: 44.000000 OUTPUT: 48.000000 OUTPUT: 44.000000 OUTPUT: 48.000000
 #5 transferring context: 346B done
 #5 DONE 0.0s
 
-#6 [mpi-app-2 5/7] COPY /src/lab_6/start.cpp /app/test.cpp
+#6 [mpi-app-2 4/7] COPY /src/lab_6 /app
 #6 CACHED
 
 #7 [mpi-app-2 6/7] RUN mpicxx -o test ./test.cpp
 #7 CACHED
 
-#8 [mpi-app-2 2/7] RUN apt-get update &&     apt-get install -y     build-essential     openmpi-bin openmpi-common libopenmpi-dev      && rm -rf /var/lib/apt/lists/*
+#8 [mpi-app-2 5/7] COPY /src/lab_6/start.cpp /app/test.cpp
 #8 CACHED
 
-#9 [mpi-app-2 3/7] WORKDIR /app
+#9 [mpi-app-2 2/7] RUN apt-get update &&     apt-get install -y     build-essential     openmpi-bin openmpi-common libopenmpi-dev      && rm -rf /var/lib/apt/lists/*
 #9 CACHED
 
-#10 [mpi-app-2 4/7] COPY /src/lab_6 /app
+#10 [mpi-app-2 3/7] WORKDIR /app
 #10 CACHED
 
 #11 [mpi-app-2 7/7] RUN chmod +x /app/test
@@ -96,26 +97,16 @@ mpi_1  | OUTPUT: 44.000000 OUTPUT: 48.000000 OUTPUT: 44.000000 OUTPUT: 48.000000
 
 #12 [mpi-app-2] exporting to image
 #12 exporting layers done
-#12 writing image sha256:518054eebfcdfa89bd01f1e0de1b18754faf5b8285ddfe3f2ab8dd1272ccc8f5 done
+#12 writing image sha256:6f5654bbc477f888f3d055c2a0d60da8b6b80737a919f7e8c2bf8eb22838cf38 done
 #12 naming to docker.io/library/files-mpi-app-2 done
 #12 DONE 0.0s
 
 #13 [mpi-app-2] resolving provenance for metadata file
 #13 DONE 0.0s
 Attaching to mpi_3
-mpi_3  | OUTPUT: Процесс 2 завершил за 0 секунд.
-mpi_3  | OUTPUT: Процесс 0 завершил за 0 секунд.
-mpi_3  | OUTPUT: Результирующая матрица C:
-mpi_3  | OUTPUT: 16.000000 OUTPUT: 20.000000 OUTPUT: 16.000000 OUTPUT: 20.000000 OUTPUT: 16.000000 OUTPUT: 20.000000 OUTPUT: 0.000000 OUTPUT: 0.000000 
-mpi_3  | OUTPUT: 20.000000 OUTPUT: 24.000000 OUTPUT: 20.000000 OUTPUT: 24.000000 OUTPUT: 20.000000 OUTPUT: 24.000000 OUTPUT: 0.000000 OUTPUT: 0.000000 
-mpi_3  | OUTPUT: 24.000000 OUTPUT: 28.000000 OUTPUT: 24.000000 OUTPUT: 28.000000 OUTPUT: 24.000000 OUTPUT: 28.000000 OUTPUT: 0.000000 OUTPUT: 0.000000 
-mpi_3  | OUTPUT: 28.000000 OUTPUT: 32.000000 OUTPUT: 28.000000 OUTPUT: 32.000000 OUTPUT: 0.000000 OUTPUT: 0.000000 OUTPUT: 0.000000 OUTPUT: 0.000000 
-mpi_3  | OUTPUT: 32.000000 OUTPUT: 36.000000 OUTPUT: 32.000000 OUTPUT: 36.000000 OUTPUT: 32.000000 OUTPUT: 36.000000 OUTPUT: 0.000000 OUTPUT: 0.000000 
-mpi_3  | OUTPUT: 36.000000 OUTPUT: 40.000000 OUTPUT: 36.000000 OUTPUT: 40.000000 OUTPUT: 0.000000 OUTPUT: 0.000000 OUTPUT: 0.000000 OUTPUT: 0.000000 
-mpi_3  | OUTPUT: 0.000000 OUTPUT: 0.000000 OUTPUT: 0.000000 OUTPUT: 0.000000 OUTPUT: 0.000000 OUTPUT: 0.000000 OUTPUT: 0.000000 OUTPUT: 0.000000 
-mpi_3  | OUTPUT: 0.000000 OUTPUT: 0.000000 OUTPUT: 0.000000 OUTPUT: 0.000000 OUTPUT: 0.000000 OUTPUT: 0.000000 OUTPUT: 0.000000 OUTPUT: 0.000000 
-mpi_3  | OUTPUT: Процесс 1 завершил за 0 секунд.
-[Kmpi_3 exited with code 0
+mpi_3  | OUTPUT: Матрица A размером 8x4
+mpi_3  | OUTPUT: Матрица B размером 4x4
+[Kmpi_3 exited with code 1
 #0 building with "desktop-linux" instance using docker driver
 
 #1 [mpi-app-3 internal] load build definition from Dockerfile
@@ -136,19 +127,19 @@ mpi_3  | OUTPUT: Процесс 1 завершил за 0 секунд.
 #5 transferring context: 346B done
 #5 DONE 0.0s
 
-#6 [mpi-app-3 5/7] COPY /src/lab_6/start.cpp /app/test.cpp
+#6 [mpi-app-3 3/7] WORKDIR /app
 #6 CACHED
 
-#7 [mpi-app-3 6/7] RUN mpicxx -o test ./test.cpp
+#7 [mpi-app-3 4/7] COPY /src/lab_6 /app
 #7 CACHED
 
 #8 [mpi-app-3 2/7] RUN apt-get update &&     apt-get install -y     build-essential     openmpi-bin openmpi-common libopenmpi-dev      && rm -rf /var/lib/apt/lists/*
 #8 CACHED
 
-#9 [mpi-app-3 4/7] COPY /src/lab_6 /app
+#9 [mpi-app-3 5/7] COPY /src/lab_6/start.cpp /app/test.cpp
 #9 CACHED
 
-#10 [mpi-app-3 3/7] WORKDIR /app
+#10 [mpi-app-3 6/7] RUN mpicxx -o test ./test.cpp
 #10 CACHED
 
 #11 [mpi-app-3 7/7] RUN chmod +x /app/test
@@ -156,24 +147,13 @@ mpi_3  | OUTPUT: Процесс 1 завершил за 0 секунд.
 
 #12 [mpi-app-3] exporting to image
 #12 exporting layers done
-#12 writing image sha256:3ba5d53118ff4226a5dd13ad4a8aacfc202b400a85d052daaa4c814bc15f243e done
+#12 writing image sha256:68fb442754d5f85ff62f53eab969d9f3d15b10a983abd46171c7da5d8ef2e291 done
 #12 naming to docker.io/library/files-mpi-app-3 done
 #12 DONE 0.0s
 
 #13 [mpi-app-3] resolving provenance for metadata file
 #13 DONE 0.0s
-Attaching to mpi_4
-mpi_4  | OUTPUT: Процесс 0 завершил за 0 секунд.
-mpi_4  | OUTPUT: Результирующая матрица C:
-mpi_4  | OUTPUT: 16.000000 OUTPUT: 20.000000 OUTPUT: 16.000000 OUTPUT: 20.000000 OUTPUT: 16.000000 OUTPUT: 20.000000 OUTPUT: 16.000000 OUTPUT: 20.000000 
-mpi_4  | OUTPUT: 20.000000 OUTPUT: 24.000000 OUTPUT: 20.000000 OUTPUT: 24.000000 OUTPUT: 20.000000 OUTPUT: 24.000000 OUTPUT: 20.000000 OUTPUT: 24.000000 
-mpi_4  | OUTPUT: 24.000000 OUTPUT: 28.000000 OUTPUT: 24.000000 OUTPUT: 28.000000 OUTPUT: 24.000000 OUTPUT: 28.000000 OUTPUT: 24.000000 OUTPUT: 28.000000 
-mpi_4  | OUTPUT: 28.000000 OUTPUT: 32.000000 OUTPUT: 28.000000 OUTPUT: 32.000000 OUTPUT: 28.000000 OUTPUT: 32.000000 OUTPUT: 28.000000 OUTPUT: 32.000000 
-mpi_4  | OUTPUT: 32.000000 OUTPUT: 36.000000 OUTPUT: 32.000000 OUTPUT: 36.000000 OUTPUT: 32.000000 OUTPUT: 36.000000 OUTPUT: 32.000000 OUTPUT: 36.000000 
-mpi_4  | OUTPUT: 36.000000 OUTPUT: 40.000000 OUTPUT: 36.000000 OUTPUT: 40.000000 OUTPUT: 36.000000 OUTPUT: 40.000000 OUTPUT: 36.000000 OUTPUT: 40.000000 
-mpi_4  | OUTPUT: 40.000000 OUTPUT: 44.000000 OUTPUT: 40.000000 OUTPUT: 44.000000 OUTPUT: 40.000000 OUTPUT: 44.000000 OUTPUT: 40.000000 OUTPUT: 44.000000 
-mpi_4  | OUTPUT: 44.000000 OUTPUT: 48.000000 OUTPUT: 44.000000 OUTPUT: 48.000000 OUTPUT: 44.000000 OUTPUT: 48.000000 OUTPUT: 44.000000 OUTPUT: 48.000000 
-mpi_4  | OUTPUT: Процесс 1 завершил за 0 секунд.
-mpi_4  | OUTPUT: Процесс 2 завершил за 0 секунд.
-mpi_4  | OUTPUT: Процесс 3 завершил за 0 секунд.
-[Kmpi_4 exited with code 0
+Attaching to mpi_8
+mpi_8  | OUTPUT: Матрица A размером 8x4
+mpi_8  | OUTPUT: Матрица B размером 4x4
+[Kmpi_8 exited with code 1

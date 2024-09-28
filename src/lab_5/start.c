@@ -4,16 +4,9 @@
 
 int main(int argc, char **argv)
 {
-
-    /*
-    сдвиг данных вдоль линейки компьютеров.
-    Все ветви должны одновременно сдвигать свои данные соседним ветвям вдоль линейки 
-    на один шаг в сторону увеличения и, затем, в сторону уменьшения ранга ветвей.
-    */
-
     int rank, size, i, A, B, dims[NUM_DIMS];
     int periods[NUM_DIMS], new_coords[NUM_DIMS];
-    int sourceb, destb, sourcem, destm;
+    int sourcem, destb;
     int reorder = 0;
     MPI_Comm comm_cart;
     MPI_Status status;
@@ -22,7 +15,7 @@ int main(int argc, char **argv)
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
     MPI_Comm_size(MPI_COMM_WORLD, &size);
 
-    // обнуляем массив dims и заполняем массив periods для топологии "линейка"
+    // инициализация массива dims и periods для топологии "линейка"
     for (i = 0; i < NUM_DIMS; i++)
     {
         dims[i] = 0;
@@ -41,21 +34,28 @@ int main(int argc, char **argv)
     B = -1;
 
     // определяем соседей
-    sourcem = (new_coords[0] == 0) ? MPI_PROC_NULL : new_coords[0] - 1;
-    destb = (new_coords[0] == dims[0] - 1) ? MPI_PROC_NULL : new_coords[0] + 1;
+    int left = new_coords[0] - 1; // левый сосед
+    int right = new_coords[0] + 1; // правый сосед
 
     // сдвиг данных вдоль линейки в сторону увеличения
-    MPI_Sendrecv(&A, 1, MPI_INT, destb, 0, &B, 1, MPI_INT, sourcem, 0, comm_cart, &status); // отправка и получение данных
-    printf("OUTPUT: rank=%d отправил %d, получил %d от %d\n", rank, A, B, sourcem);
+    if (right < dims[0]) {
+        MPI_Sendrecv(&A, 1, MPI_INT, right, 0, &B, 1, MPI_INT, left, 0, comm_cart, &status); // отправка и получение данных
+        printf("OUTPUT: rank=%d отправил %d, получил %d от %d\n", rank, A, B, left);
+        A = B; // обновляем значение A
+    } else {
+        printf("OUTPUT: rank=%d (крайний процесс) не отправил в правый процесс\n", rank);
+    }
 
     // сдвиг данных вдоль линейки в сторону уменьшения
-    sourcem = (new_coords[0] == 0) ? MPI_PROC_NULL : new_coords[0] - 1;
-    destb = (new_coords[0] == dims[0] - 1) ? MPI_PROC_NULL : new_coords[0] + 1;
+    if (left >= 0) {
+        MPI_Sendrecv(&A, 1, MPI_INT, left, 0, &B, 1, MPI_INT, right, 0, comm_cart, &status); // отправка и получение данных
+        printf("OUTPUT: rank=%d отправил %d, получил %d от %d\n", rank, A, B, right);
+        A = B; // обновляем значение A
+    } else {
+        printf("OUTPUT: rank=%d (крайний процесс) не отправил в левый процесс\n", rank);
+    }
 
-    MPI_Sendrecv(&A, 1, MPI_INT, sourcem, 0, &B, 1, MPI_INT, destb, 0, comm_cart, &status); // отправка и получение данных
-    printf("OUTPUT: rank=%d отправил %d, получил %d от %d\n", rank, A, B, destb);
-
-    // ссвобождаем ресурсы
+    // освобождаем ресурсы
     MPI_Comm_free(&comm_cart);
     MPI_Finalize();
     return 0;
