@@ -28,17 +28,18 @@ int main(int argc, char **argv)
     double time1, time2;
     double *Avector, *Bvector;
 
-    MPI_Init(&argc, &argv);
+    MPI_Init(&argc, &argv); // инициализация MPI
     MPI_Comm_size(MPI_COMM_WORLD, &size);
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
 
     if (rank == 0)
     {
+        // вывод рамеров матриц
         printf("OUTPUT: Матрица A размером %dx%d\n", N1, M1);
         printf("OUTPUT: Матрица B размером %dx%d\n", N2, M2);
     }
 
-    // Проверка на количество процессов
+    // проверка на количество процессов
     if (size > N1)
     {
         if (rank == 0)
@@ -125,7 +126,7 @@ int main(int argc, char **argv)
 
     time2 = MPI_Wtime();
 
-    // Сборка результата
+    // сборка результата
     if (rank == 0)
     {
         for (int k = 0; k < size; k++)
@@ -136,7 +137,7 @@ int main(int argc, char **argv)
             }
         }
 
-        // Вывод результирующей матрицы C
+        // вывод результирующей матрицы C
         printf("OUTPUT: Результирующая матрица C:\n");
         for (i = 0; i < N1; i++)
         {
