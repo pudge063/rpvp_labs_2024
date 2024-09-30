@@ -5,7 +5,7 @@
 #1 DONE 0.0s
 
 #2 [mpi-app-1 internal] load metadata for docker.io/library/ubuntu:22.04
-#2 DONE 1.9s
+#2 DONE 0.7s
 
 #3 [mpi-app-1 internal] load .dockerignore
 #3 transferring context: 2B done
@@ -15,38 +15,47 @@
 #4 DONE 0.0s
 
 #5 [mpi-app-1 internal] load build context
-#5 transferring context: 4.61kB done
+#5 transferring context: 346B done
 #5 DONE 0.0s
 
-#6 [mpi-app-1 2/7] RUN apt-get update &&     apt-get install -y     build-essential     openmpi-bin openmpi-common libopenmpi-dev      && rm -rf /var/lib/apt/lists/*
+#6 [mpi-app-1 3/7] WORKDIR /app
 #6 CACHED
 
-#7 [mpi-app-1 3/7] WORKDIR /app
+#7 [mpi-app-1 5/7] COPY /src/lab_6/start.cpp /app/test.cpp
 #7 CACHED
 
-#8 [mpi-app-1 4/7] COPY /src/lab_3 /app
-#8 DONE 0.0s
+#8 [mpi-app-1 2/7] RUN apt-get update &&     apt-get install -y     build-essential     openmpi-bin openmpi-common libopenmpi-dev      && rm -rf /var/lib/apt/lists/*
+#8 CACHED
 
-#9 [mpi-app-1 5/7] COPY /src/lab_3/sgemv.c /app/test.c
-#9 DONE 0.0s
+#9 [mpi-app-1 6/7] RUN mpicxx -o test ./test.cpp
+#9 CACHED
 
-#10 [mpi-app-1 6/7] RUN mpicc -o test test.c -lm
-#10 DONE 0.2s
+#10 [mpi-app-1 4/7] COPY /src/lab_6 /app
+#10 CACHED
 
 #11 [mpi-app-1 7/7] RUN chmod +x /app/test
-#11 DONE 0.1s
+#11 CACHED
 
 #12 [mpi-app-1] exporting to image
-#12 exporting layers 0.0s done
-#12 writing image sha256:daf4b62d170e1f16a433c3b6bb76bf6a6eea2471d34767456fcbc8af85261b94 done
+#12 exporting layers done
+#12 writing image sha256:8d17977044f6d2919cf90d131139b9106e6082d69c5c9e52ef478a697b7bc7f7 done
 #12 naming to docker.io/library/files-mpi-app-1 done
 #12 DONE 0.0s
 
 #13 [mpi-app-1] resolving provenance for metadata file
 #13 DONE 0.0s
 Attaching to mpi_1
-mpi_1  | OUTPUT: Для 1 процессов: Максимальный размер матрицы N = 46340
-mpi_1  | OUTPUT: Время выполнения на 1 процессах: S(1) = 1.231106
+mpi_1  | OUTPUT: Матрица A размером 8x4
+mpi_1  | OUTPUT: Матрица B размером 4x4
+mpi_1  | OUTPUT: Результирующая матрица C:
+mpi_1  | OUTPUT: 4.000000 6.000000 4.000000 6.000000 
+mpi_1  | OUTPUT: 12.000000 14.000000 12.000000 14.000000 
+mpi_1  | OUTPUT: 20.000000 22.000000 20.000000 22.000000 
+mpi_1  | OUTPUT: 28.000000 30.000000 28.000000 30.000000 
+mpi_1  | OUTPUT: 36.000000 38.000000 36.000000 38.000000 
+mpi_1  | OUTPUT: 44.000000 46.000000 44.000000 46.000000 
+mpi_1  | OUTPUT: 0.000000 0.000000 0.000000 0.000000 
+mpi_1  | OUTPUT: 0.000000 0.000000 0.000000 0.000000 
 [Kmpi_1 exited with code 0
 #0 building with "desktop-linux" instance using docker driver
 
@@ -65,7 +74,7 @@ mpi_1  | OUTPUT: Время выполнения на 1 процессах: S(1)
 #4 DONE 0.0s
 
 #5 [mpi-app-2 internal] load build context
-#5 transferring context: 202B done
+#5 transferring context: 346B done
 #5 DONE 0.0s
 
 #6 [mpi-app-2 2/7] RUN apt-get update &&     apt-get install -y     build-essential     openmpi-bin openmpi-common libopenmpi-dev      && rm -rf /var/lib/apt/lists/*
@@ -74,13 +83,13 @@ mpi_1  | OUTPUT: Время выполнения на 1 процессах: S(1)
 #7 [mpi-app-2 3/7] WORKDIR /app
 #7 CACHED
 
-#8 [mpi-app-2 6/7] RUN mpicc -o test test.c -lm
+#8 [mpi-app-2 5/7] COPY /src/lab_6/start.cpp /app/test.cpp
 #8 CACHED
 
-#9 [mpi-app-2 4/7] COPY /src/lab_3 /app
+#9 [mpi-app-2 6/7] RUN mpicxx -o test ./test.cpp
 #9 CACHED
 
-#10 [mpi-app-2 5/7] COPY /src/lab_3/sgemv.c /app/test.c
+#10 [mpi-app-2 4/7] COPY /src/lab_6 /app
 #10 CACHED
 
 #11 [mpi-app-2 7/7] RUN chmod +x /app/test
@@ -88,15 +97,24 @@ mpi_1  | OUTPUT: Время выполнения на 1 процессах: S(1)
 
 #12 [mpi-app-2] exporting to image
 #12 exporting layers done
-#12 writing image sha256:cba9315459a0c26d9201948c8ccabd373b78e71e5d8bd93d5658ee6f12cc8258 done
+#12 writing image sha256:ce20a931a2443af2fb8aa6b632a79d0adb7e5e7a415450a0fbb82d1a1be62f97 done
 #12 naming to docker.io/library/files-mpi-app-2 done
 #12 DONE 0.0s
 
 #13 [mpi-app-2] resolving provenance for metadata file
 #13 DONE 0.0s
 Attaching to mpi_4
-mpi_4  | OUTPUT: Для 4 процессов: Максимальный размер матрицы N = 23169
-mpi_4  | OUTPUT: Время выполнения на 4 процессах: S(4) = 0.219006
+mpi_4  | OUTPUT: Матрица A размером 8x4
+mpi_4  | OUTPUT: Матрица B размером 4x4
+mpi_4  | OUTPUT: Результирующая матрица C:
+mpi_4  | OUTPUT: 4.000000 6.000000 4.000000 6.000000 
+mpi_4  | OUTPUT: 12.000000 14.000000 12.000000 14.000000 
+mpi_4  | OUTPUT: 20.000000 22.000000 20.000000 22.000000 
+mpi_4  | OUTPUT: 28.000000 30.000000 28.000000 30.000000 
+mpi_4  | OUTPUT: 36.000000 38.000000 36.000000 38.000000 
+mpi_4  | OUTPUT: 44.000000 46.000000 44.000000 46.000000 
+mpi_4  | OUTPUT: 0.000000 0.000000 0.000000 0.000000 
+mpi_4  | OUTPUT: 0.000000 0.000000 0.000000 0.000000 
 [Kmpi_4 exited with code 0
 #0 building with "desktop-linux" instance using docker driver
 
@@ -105,7 +123,7 @@ mpi_4  | OUTPUT: Время выполнения на 4 процессах: S(4)
 #1 DONE 0.0s
 
 #2 [mpi-app-3 internal] load metadata for docker.io/library/ubuntu:22.04
-#2 DONE 0.3s
+#2 DONE 0.5s
 
 #3 [mpi-app-3 internal] load .dockerignore
 #3 transferring context: 2B done
@@ -115,22 +133,22 @@ mpi_4  | OUTPUT: Время выполнения на 4 процессах: S(4)
 #4 DONE 0.0s
 
 #5 [mpi-app-3 internal] load build context
-#5 transferring context: 202B done
+#5 transferring context: 346B done
 #5 DONE 0.0s
 
 #6 [mpi-app-3 2/7] RUN apt-get update &&     apt-get install -y     build-essential     openmpi-bin openmpi-common libopenmpi-dev      && rm -rf /var/lib/apt/lists/*
 #6 CACHED
 
-#7 [mpi-app-3 5/7] COPY /src/lab_3/sgemv.c /app/test.c
+#7 [mpi-app-3 3/7] WORKDIR /app
 #7 CACHED
 
-#8 [mpi-app-3 3/7] WORKDIR /app
+#8 [mpi-app-3 5/7] COPY /src/lab_6/start.cpp /app/test.cpp
 #8 CACHED
 
-#9 [mpi-app-3 6/7] RUN mpicc -o test test.c -lm
+#9 [mpi-app-3 4/7] COPY /src/lab_6 /app
 #9 CACHED
 
-#10 [mpi-app-3 4/7] COPY /src/lab_3 /app
+#10 [mpi-app-3 6/7] RUN mpicxx -o test ./test.cpp
 #10 CACHED
 
 #11 [mpi-app-3 7/7] RUN chmod +x /app/test
@@ -138,13 +156,13 @@ mpi_4  | OUTPUT: Время выполнения на 4 процессах: S(4)
 
 #12 [mpi-app-3] exporting to image
 #12 exporting layers done
-#12 writing image sha256:ea59dfae7451bd637a785b1849bf3fdf8850bc64491fbc0b96dd3dff55c8476f done
+#12 writing image sha256:092e301d7a71d23e9f8067fcb9d11b8f1703441cd0a311e48e748a5e9406bb3e done
 #12 naming to docker.io/library/files-mpi-app-3 done
 #12 DONE 0.0s
 
 #13 [mpi-app-3] resolving provenance for metadata file
 #13 DONE 0.0s
 Attaching to mpi_8
-mpi_8  | OUTPUT: Для 8 процессов: Максимальный размер матрицы N = 16383
-mpi_8  | OUTPUT: Время выполнения на 8 процессах: S(8) = 0.158879
-[Kmpi_8 exited with code 0
+mpi_8  | OUTPUT: Матрица A размером 8x4
+mpi_8  | OUTPUT: Матрица B размером 4x4
+[Kmpi_8 exited with code 1
